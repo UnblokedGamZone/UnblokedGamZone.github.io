@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unblocked Game Zone</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    /* Top Menu Bar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(34, 34, 34, 0.75);
+      padding: 20px 30px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo img {
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+    }
+
+    .navbar-title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-icon {
+      width: 50px;
+      height: 50px;
+      background-color: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .search-bar {
+      height: 36px;
+      padding: 5px 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    /* Content Section */
+    .content {
+      padding: 40px 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .menu-box {
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      width: 600px;
+      padding: 40px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .menu-list {
+      font-size: 24px;
+      line-height: 2.2;
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .menu-list li::before {
+      content: "- ";
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Menu -->
+  <div class="navbar">
+    <div class="navbar-logo">
+      <img src="image.png" alt="Website Logo">
+      <div class="navbar-title">Unblocked Game Zone</div>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-icons">
+        <a href="page1.html" class="nav-icon"><img src="icon1.png" alt="Page 1"></a>
+        <a href="page2.html" class="nav-icon"><img src="icon2.png" alt="Page 2"></a>
+        <a href="page3.html" class="nav-icon"><img src="icon3.png" alt="Page 3"></a>
+        <a href="page4.html" class="nav-icon"><img src="icon4.png" alt="Page 4"></a>
+        <a href="contact.html" class="nav-icon"><img src="contact.png" alt="Contact"></a>
+      </div>
+      <input type="text" class="search-bar" placeholder="Search...">
+    </div>
+  </div>
+
+  <!-- Main Content: Menu Box -->
+  <div class="content">
+    <div class="menu-box">
+      <div class="menu-title">Menu:</div>
+      <ul class="menu-list">
+        <li>Change Logs</li>
+        <li>Forms</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
