@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="index.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unblocked Game Zone</title>
 
   <!-- Google Font: Noto Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     * {
@@ -97,68 +100,126 @@
       justify-content: center;
     }
 
-    .menu-box {
-      background-color: white;
+    /* Updated Carousel Styles */
+    .game-carousel {
+      display: flex;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      width: 100vw;       /* Full viewport width */
+      max-width: 100%;
       border: 2px solid #ccc;
       border-radius: 10px;
-      width: 600px;
-      padding: 40px;
+      margin: auto;
+      background: white;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
 
-    .menu-title {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 25px;
+    .game-card {
+      flex: 0 0 100vw;   /* Each card takes full viewport width */
+      height: 300px;
       text-align: center;
+      text-decoration: none;
+      color: black;
+      user-select: none;
+      position: relative;
     }
 
-    .menu-list {
-      font-size: 24px;
-      line-height: 2.2;
-      list-style-type: none;
-      padding-left: 0;
-      text-align: center;
+    .game-card img {
+      width: 100%;
+      height: 260px;      /* Large visible image */
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
 
-    .menu-list li::before {
-      content: "- ";
+    .game-title {
+      padding: 10px;
+      font-size: 22px;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
-
   <!-- Top Navigation Menu -->
   <div class="navbar">
     <div class="navbar-logo">
-      <img src="image.png" alt="Website Logo">
+      <img src="image.png" alt="Website Logo" />
       <div class="navbar-title">Unblocked Game Zone</div>
     </div>
 
     <div class="nav-right">
       <div class="nav-icons">
-        <a href="page1.html" class="nav-icon"><img src="icon1.png" alt="Page 1"></a>
-        <a href="page2.html" class="nav-icon"><img src="icon2.png" alt="Page 2"></a>
-        <a href="page3.html" class="nav-icon"><img src="icon3.png" alt="Page 3"></a>
-        <a href="page4.html" class="nav-icon"><img src="icon4.png" alt="Page 4"></a>
-        <a href="contact.html" class="nav-icon"><img src="contact.png" alt="Contact"></a>
+        <a href="page1.html" class="nav-icon"
+          ><img src="icon1.png" alt="Page 1"
+        /></a>
+        <a href="page2.html" class="nav-icon"
+          ><img src="icon2.png" alt="Page 2"
+        /></a>
+        <a href="page3.html" class="nav-icon"
+          ><img src="icon3.png" alt="Page 3"
+        /></a>
+        <a href="page4.html" class="nav-icon"
+          ><img src="icon4.png" alt="Page 4"
+        /></a>
+        <a href="contact.html" class="nav-icon"
+          ><img src="contact.png" alt="Contact"
+        /></a>
       </div>
-      <input type="text" class="search-bar" placeholder="Search...">
+      <input type="text" class="search-bar" placeholder="Search..." />
     </div>
   </div>
 
-  <!-- Main Content: Menu Box -->
+  <!-- Main Content: Game Carousel -->
   <div class="content">
-    <div class="menu-box">
-      <div class="menu-title">Menu:</div>
-      <ul class="menu-list">
-        <li>Change Logs</li>
-        <li>Forms</li>
-      </ul>
-    </div>
+    <div class="game-carousel" id="game-carousel"></div>
   </div>
 
+  <script>
+    const allGames = [
+      { title: "Slope", image: "games/slope.png", link: "slope.html" },
+      { title: "Run 3", image: "games/run3.png", link: "run3.html" },
+      { title: "1v1.LOL", image: "games/1v1lol.png", link: "1v1.html" },
+      { title: "Retro Bowl", image: "games/retrobowl.png", link: "retrobowl.html" },
+      { title: "Cookie Clicker", image: "games/cookieclicker.png", link: "cookie.html" },
+      { title: "Subway Surfers", image: "games/subway.png", link: "subway.html" },
+      { title: "Minecraft Classic", image: "games/minecraft.png", link: "minecraft.html" },
+      { title: "Tunnel Rush", image: "games/tunnelrush.png", link: "tunnelrush.html" },
+      { title: "Flappy Bird", image: "games/flappybird.png", link: "flappy.html" },
+      { title: "2048", image: "games/2048.png", link: "2048.html" }
+    ];
+
+    function getRandomGames(arr, count) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    }
+
+    const carousel = document.getElementById("game-carousel");
+    const selectedGames = getRandomGames(allGames, 5);
+
+    selectedGames.forEach((game) => {
+      const card = document.createElement("a");
+      card.className = "game-card";
+      card.href = game.link;
+      card.innerHTML = `
+        <img src="${game.image}" alt="${game.title}" />
+        <div class="game-title">${game.title}</div>
+      `;
+      carousel.appendChild(card);
+    });
+
+    let currentIndex = 0;
+
+    function scrollToIndex(index) {
+      carousel.scrollTo({
+        left: index * carousel.clientWidth,
+        behavior: "smooth",
+      });
+    }
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % selectedGames.length;
+      scrollToIndex(currentIndex);
+    }, 3000); // scroll every 3 seconds
+  </script>
 </body>
 </html>
-
