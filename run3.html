@@ -12,6 +12,8 @@
   />
 
   <link rel="stylesheet" href="game.css" />
+  <!-- Ruffle Flash Emulator -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
   <header>
@@ -22,15 +24,8 @@
     <!-- Game Container -->
     <section class="game-section">
       <div class="game-container">
-        <!-- Embedding SWF Game -->
-        <object data="games/run3.swf" type="application/x-shockwave-flash" width="100%" height="600px">
-          <param name="movie" value="games/run3.swf">
-          <param name="wmode" value="direct">
-          <param name="menu" value="false">
-          <param name="allowScriptAccess" value="never">
-          <param name="allowNetworking" value="internal">
-          <embed src="games/run3.swf" type="application/x-shockwave-flash" width="100%" height="600px" allowScriptAccess="never" allowNetworking="internal"></embed>
-        </object>
+        <!-- Embedding SWF Game using Ruffle -->
+        <div id="ruffle-container" style="width: 100%; height: 600px;"></div>
       </div>
     </section>
 
@@ -106,5 +101,15 @@
   <footer>
     <p>© 2025 Untitled Games | All Rights Reserved</p>
   </footer>
+
+  <script>
+    // Initialize the Ruffle Player to load the SWF game
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    const container = document.getElementById('ruffle-container');
+    container.appendChild(player);
+
+    player.load('games/run3.swf'); // Path to your SWF file
+  </script>
 </body>
 </html>
