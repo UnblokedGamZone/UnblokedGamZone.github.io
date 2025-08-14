@@ -45,15 +45,6 @@ main {
   margin-bottom: 30px;
 }
 
-.game-container object,
-.game-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 /* Description */
 .description-section {
   margin-bottom: 20px;
@@ -176,20 +167,4 @@ main {
 .site-nav .nav-item {
   color: #e0e1dd;
   text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.site-nav .nav-item:hover {
-  color: #778da9;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  background: #1b263b;
-  color: #e0e1dd;
-  padding: 10px;
-}
+ 
