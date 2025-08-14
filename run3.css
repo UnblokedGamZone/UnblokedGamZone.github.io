@@ -13,10 +13,10 @@ body {
   line-height: 1.6;
   padding-bottom: 80px; /* Space for bottom nav */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  flex-direction: column;
   text-align: center;
 }
 
@@ -36,13 +36,10 @@ header h1 {
 
 /* Main container */
 main {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
   width: 100%;
   height: 100%;
-  flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -50,9 +47,9 @@ main {
 /* Game container */
 .game-container {
   position: relative;
-  width: 100%;
-  max-width: 100%;
-  height: 70vh; /* Make the game fit most of the screen */
+  width: 80%;  /* Make the box smaller to fit the game */
+  max-width: 800px;  /* Limit the max width */
+  height: 60vh;  /* Make the game fit the screen but not take up too much space */
   background: #000;
   border: 2px solid #415a77;
   border-radius: 10px;
@@ -60,6 +57,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px 0;
 }
 
 /* Ruffle Player */
@@ -184,8 +182,4 @@ main {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #1b263b;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  box
+  background
