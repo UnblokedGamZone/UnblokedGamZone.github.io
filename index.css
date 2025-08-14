@@ -1,123 +1,301 @@
+CSS2
 
 
-/* Apply Noto Sans font site-wide */
-body {
-  font-family: 'Noto Sans', sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
+
+/* ====== Global / CSS variables ======
+   Clear mapping:
+   - HTML uses classes: .topbar, .brand, .site-logo, .site-title, .main-nav, .page-title
+   - Carousel: .carousel, .carousel-viewport, .carousel-track, .panel, .panel-content, .carousel-indicators
+   - Search: .search-area, .search-input, .search-btn
+   - Grid: .game-grid, .game-card, .game-logo
+   - All Games: .all-games-section, .all-games-container, .all-games-title
+   - Creator Picked: .creator-picked-container
+   - Footer: .bottom-bar
+   - Icons: .icon-section, .icon-container, .icon-image
+*/
+:root{
+  --main-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --accent: #0b7aff;
+  --muted: #666;
+  --bg: #193182;
+  --card-bg: #ffffff;
+  --gap: 16px;
 }
 
-/* Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--main-font);
+  background:var(--bg);
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* Navbar Styling */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(34, 34, 34, 0.75); /* 75% transparent */
-  padding: 20px 30px;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  flex-wrap: wrap;
+/* ===== Header / top nav ===== */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--gap);
+  padding:12px 20px;
+  background:rgba(255, 255, 255, 0.7);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  position:sticky;
+  top:0;
+  z-index:50;
 }
 
-.navbar-logo {
-  display: flex;
-  align-items: center;
+/* .brand wraps SVG logo and the title text */
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  gap:12px;
 }
 
-.navbar-logo img {
-  width: 60px;
-  height: 60px;
-  margin-right: 20px;
+/* explicit sizing for SVG logo - matches your 200x200 requirement */
+.site-logo{
+  width:64px;
+  height:64px;
+  flex-shrink:0;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  cursor:pointer;
 }
 
-.navbar-title {
-  font-size: 28px;
-  font-weight: bold;
+/* site title centered in header */
+.site-title{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:0.2px;
+  text-align:center;
+  color:#000;
 }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+/* Right-side navigation */
+.main-nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.main-nav .nav-link{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:8px;
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:600;
+  transition:all .18s ease;
+  user-select:none;
+}
+.main-nav .nav-link:hover,
+.main-nav .nav-link:focus{
+  color:#111;
+  background:rgba(11,122,255,0.08);
+  transform:translateY(-2px);
+  box-shadow:0 6px 12px rgba(11,122,255,0.06);
 }
 
-.search-bar {
-  height: 36px;
-  padding: 5px 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
+/* ===== Main page title ===== */
+.page{
+  padding:28px 60px;
+  max-width:1000px;
+  margin:0 auto;
+}
+.page-title{
+  text-align:center;
+  margin:10px 0 20px 0;
+  font-size:28px;
+  font-weight:700;
 }
 
-/* Icons */
-.nav-icons {
-  display: flex;
-  gap: 10px;
+/* ===== Creator Picked container ===== */
+.creator-picked-container{
+  background:rgba(255, 255, 255, 0.25);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:24px;
 }
 
-.nav-icon {
-  width: 50px;
-  height: 50px;
-  background-color: #444;
-  border-radius: 5px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+/* ===== Carousel (rotation panel) ===== */
+.carousel{
+  position:relative;
+  max-width:100%;
+  margin:0 auto;
+}
+.carousel-viewport{
+  overflow:hidden;
+  border-radius:12px;
+  background:var(--card-bg);
+  box-shadow:0 8px 30px rgba(0,0,0,0.06);
 }
 
-.nav-icon:hover {
-  transform: scale(1.1);
+/* Track is a flex container; each .panel is full width */
+.carousel-track{
+  display:flex;
+  transition:transform 600ms cubic-bezier(.2,.9,.2,1);
+  will-change:transform;
+}
+.panel{
+  min-width:100%;
+  padding:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.panel-content{
+  max-width:880px;
+  text-align:center;
+  padding:18px;
+  border-radius:8px;
+  background:linear-gradient(180deg, rgba(11,122,255,0.06), rgba(11,122,255,0.02));
+}
+/* simple headings inside panels */
+.panel h2{margin:4px 0 8px 0; font-size:22px}
+.panel .game-1-title{color:#000}
+.panel p{margin:0; color:var(--muted)}
+
+/* indicators (dots) */
+.carousel-indicators{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  padding:10px 0;
+  margin-top:6px;
+}
+.carousel-indicators button{
+  width:10px;height:10px;border-radius:50%;border:0;background:rgba(0,0,0,0.12);cursor:pointer;
+}
+.carousel-indicators button.active{background:var(--accent); transform:scale(1.15)}
+
+/* ===== All Games section ===== */
+.all-games-section{
+  max-width:100%;
+  margin:0 auto 24px auto;
+  text-align:center;
+}
+.all-games-container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.all-games-title{
+  font-size:18px;
+  font-weight:600;
+  margin:0;
 }
 
-.nav-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* ===== Search area placeholder ===== */
+.search-area{
+  margin:20px auto;
+  max-width:720px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+}
+.search-input{
+  flex:1;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:#fff;
+  min-width:200px;
+}
+.search-btn{
+  padding:10px 14px;
+  border-radius:10px;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+  cursor:not-allowed;
+  opacity:0.8;
 }
 
-/* Content Area */
-.content {
-  padding: 40px 30px;
-  display: flex;
-  justify-content: center;
+/* ===== Game grid ===== */
+.game-grid{
+  margin-top:8px;
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+}
+.game-card{
+  background:var(--card-bg);
+  border-radius:10px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:164px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.03);
+}
+.game-logo{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  background:linear-gradient(180deg,#f3f6ff,#ffffff);
+  color:#222;
+  font-weight:700;
+  letter-spacing:0.4px;
+  border:1px dashed rgba(0,0,0,0.04);
+  transition:transform 0.2s ease;
+}
+.game-logo:hover{
+  transform:scale(1.1);
 }
 
-/* Menu Box Styling */
-.menu-box {
-  background-color: white;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  width: 600px;
-  padding: 40px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+/* ===== Icon section ===== */
+.icon-section{
+  margin:24px auto 8px auto;
+  max-width:1000px;
+  text-align:center;
+}
+.icon-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  background:rgba(255, 255, 255, 0.25);
+  border-radius:8px;
+  padding:10px;
+  max-width:300px;
+  margin:0 auto;
+}
+.icon-image{
+  width:40px;
+  height:40px;
+  border-radius:4px;
+  border:1px solid rgba(0,0,0,0.06);
+  object-fit:cover;
 }
 
-.menu-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 25px;
-  text-align: center;
+/* ===== Bottom bar ===== */
+.bottom-bar{
+  padding:12px 20px;
+  background:rgba(255, 255, 255, 0.7);
+  border-top:1px solid rgba(0,0,0,0.06);
+  z-index:50;
 }
 
-.menu-list {
-  font-size: 24px;
-  line-height: 2.2;
-  list-style-type: none;
-  padding-left: 0;
-  text-align: center;
-}
-
-.menu-list li::before {
-  content: "- ";
-  font-weight: bold;
+/* ===== Responsive tweaks ===== */
+@media (max-width:720px){
+  .site-logo{width:48px;height:48px}
+  .site-title{font-size:16px}
+  .main-nav ul{gap:6px}
+  .nav-link{padding:8px 10px; font-size:13px}
+  .page-title{font-size:22px}
+  .page{padding:28px 20px}
+  .game-card{min-height:120px}
+  .icon-image{width:32px;height:32px}
 }
