@@ -3,16 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Play Run 3</title>
+  <title>Run 3 Game</title>
 
-  <!-- Font Awesome for icons in nav -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <!-- Ruffle.js (this will run the SWF file) -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 
-  <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="run3.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    #game-container {
+      border: 2px solid #000;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -20,87 +40,15 @@
   </header>
 
   <main>
-    <!-- Game Container -->
-    <section class="game-container">
-      <!-- SWF Game Container -->
-      <div id="ruffle-player"></div>
-    </section>
-
-    <!-- Description -->
-    <section class="description-section">
-      <h2>About the Game</h2>
-      <p>
-        Play directly in your browser. This site hosts multiple games you can
-        switch between at any time using the navigation bar.
-      </p>
-    </section>
-
-    <!-- More Games -->
-    <section class="more-games-section">
-      <h2>More Games</h2>
-      <div class="more-games-row">
-        <a href="game1.html" class="game-box">
-          <img src="game1.jpg" alt="Game 1" />
-          <span>Game 1</span>
-        </a>
-        <a href="game2.html" class="game-box">
-          <img src="game2.jpg" alt="Game 2" />
-          <span>Game 2</span>
-        </a>
-        <a href="game3.html" class="game-box">
-          <img src="game3.jpg" alt="Game 3" />
-          <span>Game 3</span>
-        </a>
-        <a href="game4.html" class="game-box">
-          <img src="game4.jpg" alt="Game 4" />
-          <span>Game 4</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Creator Ranking -->
-    <section class="creator-section">
-      <h2>Creator Ranking</h2>
-      <div class="creator-card">
-        <img src="creator-avatar.png" alt="Creator Avatar" />
-        <div class="creator-info">
-          <p>Rank: <strong>#1</strong></p>
-          <p>Games Created: 5</p>
-        </div>
-      </div>
-    </section>
+    <!-- SWF Game Container -->
+    <div id="game-container">
+      <div id="ruffle-player" style="width: 100%; height: 600px;"></div>
+    </div>
+    <div id="error-message" style="display: none; color: red; text-align: center;">
+      Failed to load the game. Please try again later.
+    </div>
   </main>
 
-  <!-- Bottom Website Navigation Bar -->
-  <nav class="site-nav" aria-label="Main site navigation">
-    <a href="index.html" class="nav-item" aria-label="Home">
-      <i class="fas fa-home"></i>
-      <span>Home</span>
-    </a>
-    <a href="games.html" class="nav-item" aria-label="Games">
-      <i class="fas fa-gamepad"></i>
-      <span>Games</span>
-    </a>
-    <a href="forms.html" class="nav-item" aria-label="Forms">
-      <i class="fas fa-edit"></i>
-      <span>Forms</span>
-    </a>
-    <a href="about.html" class="nav-item" aria-label="About">
-      <i class="fas fa-info-circle"></i>
-      <span>About</span>
-    </a>
-    <a href="contact.html" class="nav-item" aria-label="Contact">
-      <i class="fas fa-envelope"></i>
-      <span>Contact</span>
-    </a>
-  </nav>
-
-  <footer>
-    <p>© 2025 Untitled Games | All Rights Reserved</p>
-  </footer>
-
-  <!-- Ruffle.js (this will run the SWF file) -->
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script>
     // Ruffle Emulator Initialization
     const ruffle = window.RufflePlayer.newest();
@@ -108,7 +56,14 @@
     document.getElementById("ruffle-player").appendChild(player);
 
     // Link to the raw URL of your SWF file on GitHub Pages
-    player.load("https://unblokedgamzone.github.io/run3.swf");  // Correct URL here
+    const swfUrl = "https://unblockedgamzone.github.io/run3.swf";  // Corrected URL
+
+    player.load(swfUrl).then(() => {
+      console.log("Game loaded successfully!");
+    }).catch((error) => {
+      console.error("Failed to load SWF file:", error);
+      document.getElementById("error-message").style.display = "block";
+    });
   </script>
 </body>
 </html>
