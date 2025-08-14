@@ -47,11 +47,11 @@ main {
 /* Game container */
 .game-container {
   position: relative;
-  width: 80%;  /* Make the box smaller to fit the game */
+  width: 60%;  /* Make the box smaller to fit the game */
   max-width: 800px;  /* Limit the max width */
-  height: 60vh;  /* Make the game fit the screen but not take up too much space */
+  height: 60vh;  /* Adjust the height of the box */
   background: #000;
-  border: 2px solid #415a77;
+  border: 4px solid #415a77; /* Border around the game */
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -174,12 +174,4 @@ main {
 
 .creator-info p {
   margin-bottom: 6px;
-  font-size: 1rem;
-}
-
-/* Bottom Navigation Bar */
-.site-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background
+  font-size
