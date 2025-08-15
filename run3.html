@@ -1,35 +1,84 @@
-WORKING: 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Run 3 Game</title>
-
-  <!-- Ruffle.js (this will run the SWF file) -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <h1>Play Run 3</h1>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
+  <!-- Header -->
+  <header class="w-full text-center py-4">
+    <h1 class="text-3xl font-bold">Play Run 3</h1>
   </header>
 
-  <main>
-    <!-- SWF Game Container -->
-    <div id="game-container">
-      <div id="ruffle-player" style="width: 100%; height: 600px;"></div>
+  <!-- Main Emulator Section -->
+  <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
+    <!-- Left Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
+      <div class="text-center"></div>
     </div>
-  </main>
+    <!-- Ruffle Emulator -->
+    <div class="w-1/2">
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+        <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
+        <script>
+          // Ruffle Emulator Initialization
+          const ruffle = window.RufflePlayer.newest();
+          const player = ruffle.createPlayer();
+          player.style.width = '100%';
+          player.style.height = '100%';
+          document.getElementById("ruffle-player").appendChild(player);
+          player.load("https://unblokedgamzone.github.io/run3.swf");
+        </script>
+      </div>
+    </div>
+    <!-- Right Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
+      <div class="text-center"></div>
+    </div>0
+  </div>
 
-  <script>
-    // Ruffle Emulator Initialization
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-    document.getElementById("ruffle-player").appendChild(player);
+  <!-- Game Selection Boxes (4 Larger Squares) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 1</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 2</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 3</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 4</span>
+      </div>
+    </div>
+  </div>
 
-    // Link to the raw URL of your SWF file on GitHub Pages
-    player.load("https://unblokedgamzone.github.io/run3.swf");  // Correct URL here
-  </script>
+  <!-- Smaller Icon Boxes (5 Icons) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">More Games</h2>
+    <div class="grid grid-cols-5 gap-4">
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 1</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 2</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 3</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 4</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 5</span>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
