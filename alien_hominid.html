@@ -1,19 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Alien Hominid - Unblocked</title>
-    <!-- Load Ruffle from CDN (nightly build, matching your error's version) -->
-    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.2.0-nightly.2025.8.14"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alien Hominid - Unblocked</title>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle@0.2.0-nightly.2025.8.14"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Alien Hominid</h1>
-    <!-- Use relative path since SWF is in the same repo -->
-    <object type="application/x-shockwave-flash" data="alien_hominid.swf" width="550" height="400">
-        <param name="movie" value="alien_hominid.swf">
-        <param name="quality" value="high">
-        <param name="allowScriptAccess" value="always"> <!-- Enable script access -->
-        <p>Flash not supported? Install Ruffle or download Flash Player.</p>
-    </object>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
+  <!-- Header -->
+  <header class="w-full text-center py-4">
+    <h1 class="text-3xl font-bold">Alien Hominid</h1>
+  </header>
+
+  <!-- Main Emulator Section -->
+  <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
+    <!-- Left Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
+      <div class="text-center"></div>
+    </div>
+    <!-- Ruffle Emulator -->
+    <div class="w-1/2">
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+        <div class="w-full" style="aspect-ratio: 550/400; max-width: 650px; margin: 0 auto;">
+          <object type="application/x-shockwave-flash" data="alien_hominid.swf" width="100%" height="100%">
+            <param name="movie" value="alien_hominid.swf">
+            <param name="quality" value="high">
+            <param name="allowScriptAccess" value="always">
+            <p>Flash not supported? Install Ruffle or download Flash Player.</p>
+          </object>
+        </div>
+      </div>
+    </div>
+    <!-- Right Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
+      <div class="text-center"></div>
+    </div>
+  </div>
+
+  <!-- Game Selection Boxes (4 Larger Squares) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 1</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 2</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 3</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <span>Game 4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smaller Icon Boxes (5 Icons) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">More Games</h2>
+    <div class="grid grid-cols-5 gap-4">
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 1</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 2</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 3</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 4</span>
+      </div>
+      <div class="bg-gray-700 rounded-lg p-2 flex items-center justify-center h-24 cursor-pointer hover:bg-gray-600">
+        <span>Icon 5</span>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
