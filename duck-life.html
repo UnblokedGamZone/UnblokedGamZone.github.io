@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Life</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle/ruffle.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 550px; height: 400px;"></div>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("container");
+            container.appendChild(player);
+            player.load({ url: "duck-life.swf" });
+            player.style.width = "550px";
+            player.style.height = "400px";
+        });
+    </script>
+</body>
+</html>
