@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The World's Hardest Game</title>
+  <!-- Ruffle.js -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle/ruffle.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    #game-container {
+      display: flex;
+      justify-content: center;
+    }
+    #ruffle-player {
+      width: 550px; /* Typical width for The World's Hardest Game */
+      height: 400px; /* Typical height for The World's Hardest Game */
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The World's Hardest Game</h1>
+  </header>
+  <main>
+    <!-- SWF Game Container -->
+    <div id="game-container">
+      <div id="ruffle-player"></div>
+    </div>
+  </main>
+  <script>
+    // Ruffle Emulator Initialization
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    document.getElementById("ruffle-player").appendChild(player);
+    // Replace with the actual path to your SWF file
+    player.load("the-worlds-hardest-game.swf").catch((e) => {
+      console.error("Failed to load the game:", e);
+      document.getElementById("ruffle-player").innerHTML = "<p>Error loading the game. Please ensure the SWF file is accessible.</p>";
+    });
+  </script>
+</body>
+</html>
