@@ -49,8 +49,8 @@
     const ruffle = window.RufflePlayer.newest();
     const player = ruffle.createPlayer();
     document.getElementById("ruffle-player").appendChild(player);
-    // Replace with the actual path to your SWF file
-    player.load("the-worlds-hardest-game.swf").catch((e) => {
+    // Replace with the correct path or URL to your SWF file
+    player.load("https://unblokedgamzone.github.io/the-worlds-hardest-game.swf").catch((e) => {
       console.error("Failed to load the game:", e);
       document.getElementById("ruffle-player").innerHTML = "<p>Error loading the game. Please ensure the SWF file is accessible.</p>";
     });
