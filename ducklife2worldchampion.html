@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Life 2: World Champion - Ruffle Emulator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            width: 560px;
+            height: 384px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <object type="application/x-shockwave-flash" data="ducklife2worldchampion.swf" width="560" height="384">
+            <param name="movie" value="ducklife2worldchampion.swf">
+        </object>
+    </div>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle/ruffle.js"></script>
+</body>
+</html>
