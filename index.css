@@ -7,8 +7,8 @@
 
 body {
   font-family: Arial, sans-serif;
-  color: #333;
-  background-image: url('background4.png'); /* Updated to background4.png */
+  color: #fff; /* All text white */
+  background-image: url('background4.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,68 +24,70 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem; /* Reduced padding */
-  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Reduced gap */
+  gap: 0.5rem;
 }
 
 .site-logo {
   cursor: pointer;
-  width: 100px; /* Smaller logo */
+  width: 100px;
   height: 100px;
 }
 
 .site-title {
-  font-size: 1.2rem; /* Smaller font */
+  font-size: 1.2rem;
   font-weight: bold;
+  color: #fff; /* White text */
 }
 
 .main-nav ul {
   display: flex;
   list-style: none;
-  gap: 0.5rem; /* Reduced gap */
+  gap: 0.5rem;
 }
 
 .nav-link {
   text-decoration: none;
-  color: #333;
-  padding: 0.3rem 0.8rem; /* Smaller padding */
-  font-size: 0.9rem; /* Smaller font */
+  color: #fff; /* White text */
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
 }
 
 .nav-link:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
   border-radius: 4px;
 }
 
 /* Main content */
 .page {
-  max-width: 1000px; /* Reduced max-width for tighter layout, more side space */
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0.5rem 2rem; /* Reduced top/bottom padding, more side padding */
+  padding: 0.5rem 2rem;
 }
 
 /* Creator picked section */
 .creator-picked-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 0.5rem; /* Reduced padding */
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+  padding: 0.5rem;
   border-radius: 8px;
-  margin-bottom: 1rem; /* Reduced margin */
-  max-width: 800px; /* Increased width */
+  margin-bottom: 1rem;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .page-title {
   text-align: center;
-  margin-bottom: 0.5rem; /* Reduced margin */
-  font-size: 1.6rem; /* Smaller title */
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: #fff; /* White text */
 }
 
 /* Carousel styles */
@@ -106,24 +108,24 @@ body {
 
 .panel {
   min-width: 100%;
-  padding: 0.3rem; /* Reduced padding */
+  padding: 0.3rem;
 }
 
 .panel-link {
   text-decoration: none;
-  color: inherit;
+  color: #fff; /* White text */
 }
 
 .panel-content {
-  background-color: #fff;
-  padding: 0.3rem; /* Reduced padding */
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+  padding: 0.3rem;
   border-radius: 8px;
   text-align: center;
-  min-height: 200px; /* Slightly reduced height */
+  min-height: 200px;
 }
 
 .panel-image {
-  width: 120px; /* Smaller image to fit reduced height */
+  width: 120px;
   height: 120px;
   object-fit: cover;
   border-radius: 8px;
@@ -147,18 +149,19 @@ body {
 }
 
 .carousel-indicators button.active {
-  background-color: #333;
+  background-color: #fff; /* White for active indicator */
 }
 
 /* All games section */
 .all-games-section {
-  margin: 1rem 0; /* Reduced margin */
+  margin: 1rem 0;
 }
 
 .all-games-title {
   text-align: center;
   font-size: 1.6rem;
-  margin-bottom: 0.5rem; /* Reduced margin */
+  margin-bottom: 0.5rem;
+  color: #fff; /* White text */
 }
 
 /* Search area */
@@ -166,40 +169,46 @@ body {
   display: flex;
   justify-content: center;
   gap: 0.3rem;
-  margin-bottom: 1rem; /* Reduced margin */
+  margin-bottom: 1rem;
 }
 
 .search-input {
   padding: 0.3rem;
-  width: 250px; /* Slightly smaller input */
+  width: 250px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  color: #fff; /* White text */
+  background-color: rgba(0, 0, 0, 0.5); /* Match transparency */
+}
+
+.search-input::placeholder {
+  color: #ccc; /* Lighter placeholder for contrast */
 }
 
 .search-btn {
   padding: 0.3rem 0.8rem;
-  background-color: #333;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+  color: #fff; /* White text */
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .search-btn:hover {
-  background-color: #555;
+  background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
 }
 
 /* Game grid */
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr)); /* Slightly smaller columns */
-  gap: 0.5rem; /* Reduced gap */
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 0.5rem;
   padding: 0.5rem;
 }
 
 .game-card {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid #333;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+  border: 2px solid #fff; /* White border for contrast */
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
@@ -212,11 +221,11 @@ body {
 .game-card-inner {
   display: flex;
   align-items: center;
-  padding: 0.3rem; /* Reduced padding */
+  padding: 0.3rem;
 }
 
 .game-logo {
-  width: 80px; /* Smaller logo */
+  width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 4px;
@@ -224,20 +233,20 @@ body {
 
 .game-name {
   margin-left: 0.5rem;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: 0.9rem;
   font-weight: bold;
-  color: #333;
+  color: #fff; /* White text */
 }
 
 /* Icon section */
 .icon-section {
-  margin-top: 1rem; /* Reduced margin */
+  margin-top: 1rem;
 }
 
 .icon-nav {
   display: flex;
   justify-content: center;
-  gap: 0.5rem; /* Reduced gap */
+  gap: 0.5rem;
 }
 
 .icon-link {
@@ -248,18 +257,17 @@ body {
 }
 
 .icon-link:hover {
-  background-color: #f0f0f0;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
 }
 
 .icon-image {
-  width: 32px; /* Smaller icons */
+  width: 32px;
   height: 32px;
 }
 
 /* Footer */
 .bottom-bar {
-  background-color: #333;
-  height: 40px; /* Smaller footer */
-  margin-top: 1rem; /* Reduced margin */
+  background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+  height: 40px;
+  margin-top: 1rem;
 }
