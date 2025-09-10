@@ -11,7 +11,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-63RPNCPHQR');
   </script>
 
@@ -23,7 +22,6 @@
   <!-- TOP NAV / HEADER -->
   <header class="topbar">
     <div class="brand">
-      <!-- logo (200x200) - SVG so it's immediately visible; replace with image if desired -->
       <svg class="site-logo" width="200" height="200" viewBox="0 0 200 200" role="img" aria-labelledby="logoTitle" onclick="window.location.reload()">
         <title id="logoTitle">Site Logo</title>
         <rect width="100%" height="100%" rx="20" ry="20" fill="#e6e6e6"></rect>
@@ -31,12 +29,8 @@
           <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#333">Logo</text>
         </g>
       </svg>
-
-      <!-- Site title centered in header -->
       <div class="site-title">Unblocked Game Zone</div>
     </div>
-
-    <!-- Right-side nav with 5 items -->
     <nav class="main-nav" aria-label="Main navigation">
       <ul>
         <li><a href="#" class="nav-link">Settings</a></li>
@@ -49,95 +43,191 @@
   </header>
 
   <main class="page">
-    <!-- Creator Picked Games in transparent box -->
     <div class="creator-picked-container">
-      <!-- Page title beneath menu, centered with small gap -->
       <h1 class="page-title">Creator Picked Games</h1>
-
-      <!-- CAROUSEL / ROTATION PANEL (3 panels) -->
       <section class="carousel" aria-label="Featured creator picked games">
         <div class="carousel-viewport">
           <div class="carousel-track">
             <article class="panel" data-index="0">
-              <div class="panel-content">
-                <h2 class="game-1-title">Game 1</h2>
-                <p>Placeholder for Game 1.</p>
-              </div>
+              <a href="https://unblokedgamzone.github.io/run3" class="panel-link">
+                <div class="panel-content">
+                  <img src="run3.png" alt="Run 3" class="panel-image" />
+                  <h2>Run 3</h2>
+                  <p>Endless running adventure in space!</p>
+                </div>
+              </a>
             </article>
-
             <article class="panel" data-index="1">
-              <div class="panel-content">
-                <h2>Game 2</h2>
-                <p>Placeholder for Game 2.</p>
-              </div>
+              <a href="https://unblokedgamzone.github.io/duck-life" class="panel-link">
+                <div class="panel-content">
+                  <img src="ducklife.png" alt="Duck Life" class="panel-image" />
+                  <h2>Duck Life</h2>
+                  <p>Train your duck to become a champion!</p>
+                </div>
+              </a>
             </article>
-
             <article class="panel" data-index="2">
-              <div class="panel-content">
-                <h2>Game 3</h2>
-                <p>Placeholder for Game 3.</p>
-              </div>
+              <a href="https://unblokedgamzone.github.io/age_of_war" class="panel-link">
+                <div class="panel-content">
+                  <img src="AgeOfWar.jpg" alt="Age Of War" class="panel-image" />
+                  <h2>Age Of War</h2>
+                  <p>Evolve through ages and defeat enemies!</p>
+                </div>
+              </a>
             </article>
           </div>
         </div>
-
-        <!-- indicators only, arrows removed for automatic scrolling -->
         <div class="carousel-indicators" aria-hidden="false"></div>
       </section>
     </div>
 
-    <!-- ALL GAMES title -->
     <section class="all-games-section">
       <div class="all-games-container">
         <h2 class="all-games-title">ALL GAMES</h2>
       </div>
     </section>
 
-    <!-- Search placeholder (you said you'll complete later) -->
     <section class="search-area">
-      <input id="search" class="search-input" type="search" placeholder="Search games... (Unfinished)" />
-      <button class="search-btn" disabled>Search</button>
+      <input id="search" class="search-input" type="search" placeholder="Search games..." />
+      <button class="search-btn">Search</button>
     </section>
 
-    <!-- GRID of 10 boxes for game logos -->
     <section class="game-grid" aria-label="Game gallery">
-      <!-- generate 10 clickable game cards -->
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/run3" class="game-logo-link"><img src="run3.png" alt="Run 3" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/alien_hominid" class="game-logo-link"><img src="2025_08_15_0n8_Kleki.png" alt="Alien Hominid" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/duck-life" class="game-logo-link"><img src="ducklife.png" alt="Duck Life" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html" class="game-logo-link"><img src="easygame.png" alt="Worlds Hardest Game" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/ducklife2worldchampion.html" class="game-logo-link"><img src="2025_08_18_0xg_Kleki.png" alt="Duck Life 2" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/redball4" class="game-logo-link"><img src="redball4.png" alt="Red Ball 4" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/AwesomeTanks" class="game-logo-link"><img src="2025_08_22_0tk_Kleki.png" alt="Awesome Tanks" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/age_of_war" class="game-logo-link"><img src="AgeOfWar.jpg" alt="Age Of War" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/bloxorz" class="game-logo-link"><img src="blox123.png" alt="bloxorz" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/sticky-ninja-academy.html" class="game-logo-link"><img src="unnamed.png" alt="Sticky Ninja" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/learn-to-fly" class="game-logo-link"><img src="learntofly.png" alt="Learn To Fly" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/learn2fly" class="game-logo-link"><img src="l2f.png" alt="Learn 2 Fly" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/n" class="game-logo-link"><img src="n.png" alt="N Game" class="game-logo" /></a></div>
-      <div class="game-card"><a href="https://unblokedgamzone.github.io/burrito_bison_revenge" class="game-logo-link"><img src="burrito-bison-revenge.png" alt="Burrito Bison Revenge" class="game-logo" /></a></div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/run3" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="run3.png" alt="Run 3" class="game-logo" />
+            <span class="game-name">Run 3</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/alien_hominid" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="2025_08_15_0n8_Kleki.png" alt="Alien Hominid" class="game-logo" />
+            <span class="game-name">Alien Hominid</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/duck-life" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="ducklife.png" alt="Duck Life" class="game-logo" />
+            <span class="game-name">Duck Life</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="easygame.png" alt="Worlds Hardest Game" class="game-logo" />
+            <span class="game-name">Worlds Hardest Game</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/ducklife2worldchampion.html" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="2025_08_18_0xg_Kleki.png" alt="Duck Life 2" class="game-logo" />
+            <span class="game-name">Duck Life 2</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/redball4" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="redball4.png" alt="Red Ball 4" class="game-logo" />
+            <span class="game-name">Red Ball 4</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/AwesomeTanks" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="2025_08_22_0tk_Kleki.png" alt="Awesome Tanks" class="game-logo" />
+            <span class="game-name">Awesome Tanks</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/age_of_war" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="AgeOfWar.jpg" alt="Age Of War" class="game-logo" />
+            <span class="game-name">Age Of War</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/bloxorz" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="blox123.png" alt="bloxorz" class="game-logo" />
+            <span class="game-name">bloxorz</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/sticky-ninja-academy.html" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="unnamed.png" alt="Sticky Ninja" class="game-logo" />
+            <span class="game-name">Sticky Ninja</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/learn-to-fly" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="learntofly.png" alt="Learn To Fly" class="game-logo" />
+            <span class="game-name">Learn To Fly</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/learn2fly" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="l2f.png" alt="Learn 2 Fly" class="game-logo" />
+            <span class="game-name">Learn 2 Fly</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/n" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="n.png" alt="N Game" class="game-logo" />
+            <span class="game-name">N Game</span>
+          </div>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="https://unblokedgamzone.github.io/burrito_bison_revenge" class="game-logo-link">
+          <div class="game-card-inner">
+            <img src="burrito-bison-revenge.png" alt="Burrito Bison Revenge" class="game-logo" />
+            <span class="game-name">Burrito Bison Revenge</span>
+          </div>
+        </a>
+      </div>
     </section>
 
-    <!-- Icon section with 5 images -->
     <section class="icon-section">
-      <div class="icon-container">
-        <img src="https://via.placeholder.com/40" alt="Icon 1" class="icon-image" />
-        <img src="https://via.placeholder.com/40" alt="Icon 2" class="icon-image" />
-        <img src="https://via.placeholder.com/40" alt="Icon 3" class="icon-image" />
-        <img src="https://via.placeholder.com/40" alt="Icon 4" class="icon-image" />
-        <img src="https://via.placeholder.com/40" alt="Icon 5" class="icon-image" />
-      </div>
+      <nav class="icon-nav" aria-label="Footer navigation">
+        <a href="#" class="icon-link" title="Settings">
+          <img src="https://via.placeholder.com/40" alt="Settings Icon" class="icon-image" />
+        </a>
+        <a href="https://unblokedgamzone.github.io/contact.html" class="icon-link" title="Contacts">
+          <img src="https://via.placeholder.com/40" alt="Contacts Icon" class="icon-image" />
+        </a>
+        <a href="#" class="icon-link" title="Forms">
+          <img src="https://via.placeholder.com/40" alt="Forms Icon" class="icon-image" />
+        </a>
+        <a href="#" class="icon-link" title="Extra">
+          <img src="https://via.placeholder.com/40" alt="Extra Icon" class="icon-image" />
+        </a>
+        <a href="#" class="icon-link" title="Home">
+          <img src="https://via.placeholder.com/40" alt="Home Icon" class="icon-image" />
+        </a>
+      </nav>
     </section>
   </main>
 
-  <!-- Bottom border box -->
   <footer class="bottom-bar"></footer>
 </body>
 </html>
-
-
-
-
-
-
-
