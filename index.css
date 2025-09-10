@@ -8,14 +8,11 @@
 body {
   font-family: Arial, sans-serif;
   color: #333;
-  background-image: url('background3.png'); /* Default background image */
+  background-image: url('background3.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Keeps the background fixed when scrolling */
-  /* For future backgrounds, you can add classes like .bg1, .bg2 and switch via JS */
-  /* Example: .bg1 { background-image: url('background1.png'); } */
-  /* .bg2 { background-image: url('background2.png'); } */
+  background-attachment: fixed;
 }
 
 /* Header styles */
@@ -24,7 +21,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for readability over background */
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -73,12 +70,15 @@ body {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 2rem;
+  max-width: 600px; /* Reduced width to shrink carousel */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .page-title {
   text-align: center;
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.8rem; /* Slightly smaller title */
 }
 
 /* Carousel styles */
@@ -99,7 +99,7 @@ body {
 
 .panel {
   min-width: 100%;
-  padding: 1rem;
+  padding: 0.5rem; /* Reduced padding */
 }
 
 .panel-link {
@@ -109,29 +109,29 @@ body {
 
 .panel-content {
   background-color: #fff;
-  padding: 1rem;
+  padding: 0.5rem; /* Reduced padding */
   border-radius: 8px;
   text-align: center;
 }
 
 .panel-image {
-  width: 200px;
-  height: 200px;
+  width: 150px; /* Reduced image size */
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .carousel-indicators {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .carousel-indicators button {
-  width: 10px;
-  height: 10px;
+  width: 8px; /* Smaller indicators */
+  height: 8px;
   border-radius: 50%;
   background-color: #ccc;
   border: none;
@@ -190,7 +190,7 @@ body {
 }
 
 .game-card {
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for readability */
+  background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid #333;
   border-radius: 8px;
   overflow: hidden;
