@@ -65,17 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameGrid = document.querySelector('.game-grid');
 
   function filterGames() {
-    const query = searchInput.value.toLowerCase();
+    const query = searchInput.value.trim().toLowerCase();
     gameCards.forEach(card => {
       const name = card.querySelector('.game-name').textContent.toLowerCase();
-      if (name.includes(query)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = name.includes(query) ? 'block' : 'none';
     });
   }
 
+  // Trigger search on input change and button click
   searchInput.addEventListener('input', filterGames);
   searchBtn.addEventListener('click', filterGames);
+  // Trigger search on Enter key
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      filterGames();
+    }
+  });
 });
