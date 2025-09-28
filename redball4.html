@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Red Ball 4</title>
-  <!-- Note: Tailwind CDN is used for simplicity. For production, install Tailwind locally: https://tailwindcss.com/docs/installation -->
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@ruffle-rs/ruffle/ruffle.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
+<body class="bg-red-900 text-white flex flex-col items-center min-h-screen">
   <!-- Header -->
   <header class="w-full text-center py-4">
     <a href="https://unblokedgamzone.github.io/">
@@ -20,12 +19,12 @@
   <!-- Main Emulator Section -->
   <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
     <!-- Left Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
+    <div class="w-1/4 bg-red-950 flex items-center justify-center mr-4">
       <div class="text-center"></div>
     </div>
     <!-- Ruffle Emulator -->
     <div class="w-1/2">
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+      <div class="border-4 border-red-600 rounded-lg p-4 bg-black">
         <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
         <script>
           // Ruffle Emulator Initialization
@@ -35,35 +34,60 @@
             player.style.width = '100%';
             player.style.height = '100%';
             document.getElementById("ruffle-player").appendChild(player);
-            player.load("redball4.swf");
+            player.load("redball4.swf").catch(error => {
+              console.error("Error loading SWF file:", error);
+              document.getElementById("ruffle-player").innerHTML = "<p style='color: white; text-align: center;'>Failed to load Red Ball 4. Please ensure the SWF file is in the correct directory.</p>";
+            });
           });
         </script>
       </div>
     </div>
     <!-- Right Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
+    <div class="w-1/4 bg-red-950 flex items-center justify-center ml-4">
       <div class="text-center"></div>
     </div>
   </div>
 
   <!-- Game Selection Boxes (4 Larger Squares) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
-    <p class="text-lg text-center mb-2"></p>
     <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <a href="#featured1" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+1" alt="Game 1" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured2" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+2" alt="Game 2" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured3" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+3" alt="Game 3" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured4" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+4" alt="Game 4" class="w-full h-full object-cover rounded">
-      </a>
+    <div id="featured-games" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Featured games will be populated by JavaScript -->
     </div>
+    <script>
+      // Array of available games (excluding Red Ball 4)
+      const games = [
+        { name: "Learn to Fly 2", url: "learn-to-fly.html", image: "learntofly.png" },
+        { name: "Learn to Fly", url: "learn2fly.html", image: "l2f.png" },
+        { name: "Run 3", url: "run3.html", image: "run3.png" },
+        { name: "N Game", url: "n.html", image: "n.png" }
+      ];
+
+      // Function to shuffle array (Fisher-Yates shuffle)
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Select 4 random games
+      const selectedGames = shuffle([...games]).slice(0, 4);
+
+      // Populate featured games
+      const featuredGamesContainer = document.getElementById("featured-games");
+      selectedGames.forEach(game => {
+        const gameElement = document.createElement("a");
+        gameElement.href = game.url;
+        gameElement.className = "bg-red-950 rounded-lg p-4 flex items-center h-32 cursor-pointer hover:bg-red-800";
+        gameElement.innerHTML = `
+          <img src="${game.image}" alt="${game.name}" class="w-24 h-24 object-cover rounded border-2 border-red-600 mr-4">
+          <span class="text-xl font-medium">${game.name}</span>
+        `;
+        featuredGamesContainer.appendChild(gameElement);
+      });
+    </script>
   </div>
 
   <!-- Smaller Icon Boxes (5 Icons) -->
