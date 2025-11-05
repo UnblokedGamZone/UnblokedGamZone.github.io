@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloons Tower Defense 2</title>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
+  <!-- Header -->
+  <header class="w-full text-center py-4">
+    <a href="https://unblokedgamzone.github.io/">
+      <img src="logo.png" alt="Unblocked Game Zone Logo" class="w-32 mx-auto mb-2">
+    </a>
+    <h1 class="text-3xl font-bold">Bloons Tower Defense 2</h1>
+  </header>
+
+  <!-- Main Emulator Section -->
+  <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
+    <!-- Left Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
+      <div class="text-center"></div>
+    </div>
+    <!-- Ruffle Emulator -->
+    <div class="w-1/2">
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+        <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
+        <script>
+          // Ruffle Emulator Initialization
+          const ruffle = window.RufflePlayer.newest();
+          const player = ruffle.createPlayer();
+          player.style.width = '100%';
+          player.style.height = '100%';
+          document.getElementById("ruffle-player").appendChild(player);
+          player.load("ballonstd2.swf").catch(error => {
+            console.error("Error loading SWF file:", error);
+            document.getElementById("ruffle-player").innerHTML = "<p style='color: white; text-align: center;'>Failed to load Bloons Tower Defense 2. Please ensure the SWF file is in the correct directory.</p>";
+          });
+        </script>
+      </div>
+    </div>
+    <!-- Right Ad Space -->
+    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
+      <div class="text-center"></div>
+    </div>
+  </div>
+
+  <!-- Game Selection Boxes (4 Larger Squares) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <a href="#featured1" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <img src="https://via.placeholder.com/200x200?text=Game+1" alt="Game 1" class="w-full h-full object-cover rounded">
+      </a>
+      <a href="#featured2" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <img src="https://via.placeholder.com/200x200?text=Game+2" alt="Game 2" class="w-full h-full object-cover rounded">
+      </a>
+      <a href="#featured3" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <img src="https://via.placeholder.com/200x200?text=Game+3" alt="Game 3" class="w-full h-full object-cover rounded">
+      </a>
+      <a href="#featured4" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
+        <img src="https://via.placeholder.com/200x200?text=Game+4" alt="Game 4" class="w-full h-full object-cover rounded">
+      </a>
+    </div>
+  </div>
+
+  <!-- Smaller Icon Boxes (5 Icons) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
+    <div class="grid grid-cols-5 gap-2">
+      <a href="https://unblokedgamzone.github.io/" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
+        <span class="text-sm font-medium text-center">Home</span>
+      </a>
+      <a href="https://unblokedgamzone.github.io/contact.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
+        <span class="text-sm font-medium text-center">Contacts</span>
+      </a>
+      <a href="https://unblokedgamzone.github.io/forms.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
+        <span class="text-sm font-medium text-center">Forms</span>
+      </a>
+      <a href="https://unblokedgamzone.github.io/games.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
+        <span class="text-sm font-medium text-center">Games</span>
+      </a>
+      <a href="https://unblokedgamzone.github.io/settings.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
+        <span class="text-sm font-medium text-center">Settings</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
