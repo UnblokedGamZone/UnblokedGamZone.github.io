@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Settings ⚙️ - UGZ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Unblocked Game Zone</title>
 
-  <!-- Default favicon (your normal logo) -->
+  <!-- Dynamic favicon (changes with cloaker) -->
   <link rel="icon" href="https://unblokedgamzone.github.io/run3.png" id="favicon">
 
-  <!-- Google AdSense (if you want ads here too) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8129386669248979"
-     crossorigin="anonymous"></script>
+  <!-- Tailwind CSS (same as your other pages) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    body { font-family: system-ui, sans-serif; background: #0f0f1a; color: #fff; margin:0; padding:20px; }
-    .container { max-width: 800px; margin: auto; }
-    h1 { text-align:center; color:#00ff9d; }
-    .card { background:#1a1a2e; padding:20px; margin:15px 0; border-radius:12px; box-shadow:0 4px 15px rgba(0,255,150,0.1); }
-    button, select { padding:12px; font-size:16px; margin:8px 4px; border:none; border-radius:8px; cursor:pointer; }
-    }
-    button { background:#00ff9d; color:#000; font-weight:bold; }
-    button:hover { background:#00cc7a; }
-    .cloaker-preview { font-size:18px; font-weight:bold; text-align:center; padding:15px; background:#16213a065; border-radius:10px; margin:15px 0; }
-    .credit { text-align:center; color:#666; margin-top:40px; font-size:14px; }
+    .hover\:bg-gray-600:hover { background-color: #4b5563; }
+    kbd { background: #1f2937; padding: 4px 8px; border-radius: 6px; font-size: 0.9em; }
   </style>
 </head>
-<body>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
 
-<div class="container">
-  <h1>Settings ⚙️</h1>
+  <!-- Header (exactly like your game pages) -->
+  <header class="w-full text-center py-6">
+    <a href="https://unblokedgamzone.github.io/">
+      <img src="logo.png" alt="Unblocked Game Zone Logo" class="w-32 mx-auto mb-3">
+    </a>
+    <h1 class="text-4xl font-bold">Settings</h1>
+  </header>
 
-  <!-- TAB CLOAKER (most important feature) -->
-  <div class="card">
-    <h2>Tab Cloaker (Panic Mode)</h2>
-    <p>Quickly make the tab look like a school site when someone walks by!</p>
+  <!-- Main Settings Card -->
+  <div class="w-full max-w-4xl mx-auto my-8 px-4">
+    <div class="bg-gray-800 rounded-xl p-8 shadow-2xl border border-gray-700">
 
-    <select id="cloakSelect">
-      <option value="0">Default - Unblocked Game Zone</option>
-      <option value="1">Google</option>
-      <option value="2">Google Classroom</option>
-      <option value="3">Google Docs</option>
-      <option value="4">Google Drive</option>
-      <option value="5">YouTube (Education mode)</option>
-      <option value="6">Khan Academy</option>
-      <option value="7">Prodigy</option>
-      <option value="8">Cool Math Games (looks legit)</option>
-    </select>
+      <h2 class="text-2xl font-bold mb-6 text-cyan-400">Tab Cloaker / Panic Mode</h2>
+      <p class="mb-6 text-gray-300">Change how your tab looks instantly — works on every page and survives refresh!</p>
 
-    <button onclick="applyCloak()" style="width:100%; padding:15px; font-size:18px;">APPLY CLOAK NOW</button>
+      <div class="space-y-4">
+        <select id="cloakSelect" class="w-full px-5 py-4 text-lg bg-gray-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-cyan-500">
+          <option value="0">Default — Unblocked Game Zone</option>
+          <option value="1">Google</option>
+          <option value="2">Google Classroom</option>
+          <option value="3">Google Docs</option>
+          <option value="4">Google Drive</option>
+          <option value="5">YouTube</option>
+          <option value="6">Khan Academy</option>
+          <option value="7">Prodigy</option>
+          <option value="8">Cool Math Games</option>
+        </select>
 
-    <div class="cloaker-preview" id="preview">Unblocked Game Zone — UGZ</div>
+        <button onclick="applyCloak()" class="w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xl rounded-lg transition">
+          APPLY CLOAK NOW
+        </button>
+
+        <div class="text-center py-4 text-xl font-semibold bg-gray-900 rounded-lg" id="preview">
+          Unblocked Game Zone — UGZ
+        </div>
+
+        <p class="text-center text-gray-400">
+          Press <kbd>F8</kbd> on any page → instant Google panic mode
+        </p>
+      </div>
+    </div>
   </div>
 
-  <!-- OTHER USEFUL SETTINGS -->
-  <div class="card">
-    <h2>Other Options</h2>
-    
-    <button onclick="window.location.href='/'" style="width:100%">Back to Home</button>
-    <button onclick="alert('Feature coming soon!')" style="width:100%">Dark/Light Mode Toggle</button>
-    <button onclick="if(confirm('Clear all saved games & progress?')) localStorage.clear(); alert('Cleared!')" style="width:100%; background:#ff5555;">
-      Clear All Saved Data
-    </button>
+  <!-- Bottom Menu (exactly like your other pages) -->
+  <div class="w-full max-w-7xl mx-auto my-8 px-4">
+    <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
+    <div class="grid grid-cols-5 gap-3 max-w-3xl mx-auto">
+      <a href="https://unblokedgamzone.github.io/" class="bg-gray-700 rounded-lg py-4 text-center font-medium hover:bg-gray-600 transition">Home</a>
+      <a href="https://unblokedgamzone.github.io/contact.html" class="bg-gray-700 rounded-lg py-4 text-center font-medium hover:bg-gray-600 transition">Contact</a>
+      <a href="#" class="bg-gray-700 rounded-lg py-4 text-center font-medium hover:bg-gray-600 transition">Forms</a>
+      <a href="#" class="bg-gray-700 rounded-lg py-4 text-center font-medium hover:bg-gray-600 transition">Games</a>
+      <a href="settings.html" class="bg-cyan-600 rounded-lg py-4 text-center font-bold">Settings</a>
+    </div>
   </div>
-
-  <!-- FUN PANIC KEY (press F8 anywhere on the site to instantly cloak to Google) -->
-  <div class="card">
-    <h2>Panic Key</h2>
-    <p>Press <kbd>F8</kbd> on any page → instantly changes tab to Google</p>
-  </div>
-
-  <p class="credit">Made with ❤ for the unblocked community<br>
-     <a href="https://unblokedgamzone.github.io" style="color:#00ff9d">Unblocked Game Zone</a> © 2025</p>
-</div>
 
 <script>
-// All the cloaking options
+// Cloak data
 const cloaks = [
   {title: "Unblocked Game Zone — UGZ", icon: "https://unblokedgamzone.github.io/run3.png"},
   {title: "Google", icon: "https://www.google.com/favicon.ico"},
@@ -83,30 +83,38 @@ const cloaks = [
   {title: "Google Drive", icon: "https://drive.google.com/favicon.ico"},
   {title: "YouTube", icon: "https://www.youtube.com/favicon.ico"},
   {title: "Khan Academy", icon: "https://www.khanacademy.org/favicon.ico"},
-  {title: "Prodigy", icon: "https://www.prodigygame.com/favicon.ico"},
+  {title: "Prodigy", icon: "https://code.prodigygame.com/favicon.ico"},
   {title: "Cool Math Games", icon: "https://www.coolmathgames.com/sites/default/files/favicon.ico"}
 ];
 
-function applyCloak() {
-  const select = document.getElementById("cloakSelect");
-  const chosen = cloaks[select.value];
+// Load saved cloak when page opens
+function loadCloak() {
+  const saved = localStorage.getItem("ugz_cloak") || "0";
+  document.getElementById("cloakSelect").value = saved;
+  applyCloak(); // apply immediately
+}
+loadCloak();
 
-  // Change title
+// Apply cloak
+function applyCloak() {
+  const index = document.getElementById("cloakSelect").value;
+  const chosen = cloaks[index];
+
+  localStorage.setItem("ugz_cloak", index);
   document.title = chosen.title;
+  document.getElementById("favicon").href = chosen.icon;
   document.getElementById("preview").textContent = chosen.title;
 
-  // Change favicon
-  document.getElementById("favicon").href = chosen.icon;
-
-  alert("Cloak applied! 🎭\nTab now looks like: " + chosen.title);
+  alert("Cloak applied!\nNow the tab shows: " + chosen.title);
 }
 
-// Panic key — press F8 anywhere on the site
-document.addEventListener("keydown", (e) => {
+// F8 = instant Google (works on EVERY page of your site)
+document.addEventListener("keydown", e => {
   if (e.key === "F8") {
+    localStorage.setItem("ugz_cloak", "1");
     document.title = "Google";
     document.getElementById("favicon").href = "https://www.google.com/favicon.ico";
-    alert("Panic mode activated! Tab is now Google");
+    alert("PANIC MODE — Tab is now Google");
   }
 });
 </script>
