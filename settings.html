@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings ⚙️ - UGZ</title>
+
+  <!-- Default favicon (your normal logo) -->
+  <link rel="icon" href="https://unblokedgamzone.github.io/run3.png" id="favicon">
+
+  <!-- Google AdSense (if you want ads here too) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8129386669248979"
+     crossorigin="anonymous"></script>
+
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f0f1a; color: #fff; margin:0; padding:20px; }
+    .container { max-width: 800px; margin: auto; }
+    h1 { text-align:center; color:#00ff9d; }
+    .card { background:#1a1a2e; padding:20px; margin:15px 0; border-radius:12px; box-shadow:0 4px 15px rgba(0,255,150,0.1); }
+    button, select { padding:12px; font-size:16px; margin:8px 4px; border:none; border-radius:8px; cursor:pointer; }
+    }
+    button { background:#00ff9d; color:#000; font-weight:bold; }
+    button:hover { background:#00cc7a; }
+    .cloaker-preview { font-size:18px; font-weight:bold; text-align:center; padding:15px; background:#16213a065; border-radius:10px; margin:15px 0; }
+    .credit { text-align:center; color:#666; margin-top:40px; font-size:14px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Settings ⚙️</h1>
+
+  <!-- TAB CLOAKER (most important feature) -->
+  <div class="card">
+    <h2>Tab Cloaker (Panic Mode)</h2>
+    <p>Quickly make the tab look like a school site when someone walks by!</p>
+
+    <select id="cloakSelect">
+      <option value="0">Default - Unblocked Game Zone</option>
+      <option value="1">Google</option>
+      <option value="2">Google Classroom</option>
+      <option value="3">Google Docs</option>
+      <option value="4">Google Drive</option>
+      <option value="5">YouTube (Education mode)</option>
+      <option value="6">Khan Academy</option>
+      <option value="7">Prodigy</option>
+      <option value="8">Cool Math Games (looks legit)</option>
+    </select>
+
+    <button onclick="applyCloak()" style="width:100%; padding:15px; font-size:18px;">APPLY CLOAK NOW</button>
+
+    <div class="cloaker-preview" id="preview">Unblocked Game Zone — UGZ</div>
+  </div>
+
+  <!-- OTHER USEFUL SETTINGS -->
+  <div class="card">
+    <h2>Other Options</h2>
+    
+    <button onclick="window.location.href='/'" style="width:100%">Back to Home</button>
+    <button onclick="alert('Feature coming soon!')" style="width:100%">Dark/Light Mode Toggle</button>
+    <button onclick="if(confirm('Clear all saved games & progress?')) localStorage.clear(); alert('Cleared!')" style="width:100%; background:#ff5555;">
+      Clear All Saved Data
+    </button>
+  </div>
+
+  <!-- FUN PANIC KEY (press F8 anywhere on the site to instantly cloak to Google) -->
+  <div class="card">
+    <h2>Panic Key</h2>
+    <p>Press <kbd>F8</kbd> on any page → instantly changes tab to Google</p>
+  </div>
+
+  <p class="credit">Made with ❤ for the unblocked community<br>
+     <a href="https://unblokedgamzone.github.io" style="color:#00ff9d">Unblocked Game Zone</a> © 2025</p>
+</div>
+
+<script>
+// All the cloaking options
+const cloaks = [
+  {title: "Unblocked Game Zone — UGZ", icon: "https://unblokedgamzone.github.io/run3.png"},
+  {title: "Google", icon: "https://www.google.com/favicon.ico"},
+  {title: "Google Classroom", icon: "https://classroom.google.com/favicon.ico"},
+  {title: "Google Docs", icon: "https://docs.google.com/favicon.ico"},
+  {title: "Google Drive", icon: "https://drive.google.com/favicon.ico"},
+  {title: "YouTube", icon: "https://www.youtube.com/favicon.ico"},
+  {title: "Khan Academy", icon: "https://www.khanacademy.org/favicon.ico"},
+  {title: "Prodigy", icon: "https://www.prodigygame.com/favicon.ico"},
+  {title: "Cool Math Games", icon: "https://www.coolmathgames.com/sites/default/files/favicon.ico"}
+];
+
+function applyCloak() {
+  const select = document.getElementById("cloakSelect");
+  const chosen = cloaks[select.value];
+
+  // Change title
+  document.title = chosen.title;
+  document.getElementById("preview").textContent = chosen.title;
+
+  // Change favicon
+  document.getElementById("favicon").href = chosen.icon;
+
+  alert("Cloak applied! 🎭\nTab now looks like: " + chosen.title);
+}
+
+// Panic key — press F8 anywhere on the site
+document.addEventListener("keydown", (e) => {
+  if (e.key === "F8") {
+    document.title = "Google";
+    document.getElementById("favicon").href = "https://www.google.com/favicon.ico";
+    alert("Panic mode activated! Tab is now Google");
+  }
+});
+</script>
+
+</body>
+</html>
