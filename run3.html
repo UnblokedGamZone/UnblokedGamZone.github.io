@@ -37,13 +37,13 @@
             <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
           </button>
           
-          <!-- Mute Button (icon no longer changes) -->
+          <!-- Mute Button (static icon) -->
           <button id="mute-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
             <img src="mute.png" alt="Mute/Unmute" class="w-full h-full object-contain">
           </button>
         </div>
         
-        <!-- Description Panel (larger, on the right) -->
+        <!-- Description Panel -->
         <div class="flex-1 bg-gray-800 rounded-lg p-6 shadow-lg text-lg">
           <h3 class="text-xl font-bold mb-4">Description</h3>
           <p>No description yet.</p>
@@ -123,12 +123,20 @@
       }
     });
 
-    // Mute functionality (no icon change)
+    // Mute functionality (static icon, mutes the entire game/site audio)
     const muteBtn = document.getElementById("mute-btn");
     let isMuted = false;
 
     muteBtn.addEventListener("click", () => {
       isMuted = !isMuted;
+      player.muted = isMuted;  // This mutes the whole website's audio (from the SWF)
+      
+      // Subtle visual feedback (dims button when muted)
+      muteBtn.style.opacity = isMuted ? "0.6" : "1";
+    });
+
+    // Ensure mute state applies once the player is fully loaded
+    player.addEventListener("loadeddata", () => {
       player.muted = isMuted;
     });
   </script>
