@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,16 +30,11 @@
       
       <!-- Buttons on the left, Description on the right -->
       <div class="mt-8 w-full flex flex-row gap-8 items-start">
-        <!-- Buttons Group -->
+        <!-- Buttons Group (only Fullscreen now) -->
         <div class="flex gap-6">
           <!-- Fullscreen Button -->
           <button id="fullscreen-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
             <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
-          </button>
-          
-          <!-- Mute Button (static icon) -->
-          <button id="mute-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
-            <img src="mute.png" alt="Mute/Unmute" class="w-full h-full object-contain">
           </button>
         </div>
         
@@ -121,23 +116,6 @@
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         else if (document.msExitFullscreen) document.msExitFullscreen();
       }
-    });
-
-    // Mute functionality (static icon, mutes the entire game/site audio)
-    const muteBtn = document.getElementById("mute-btn");
-    let isMuted = false;
-
-    muteBtn.addEventListener("click", () => {
-      isMuted = !isMuted;
-      player.muted = isMuted;  // This mutes the whole website's audio (from the SWF)
-      
-      // Subtle visual feedback (dims button when muted)
-      muteBtn.style.opacity = isMuted ? "0.6" : "1";
-    });
-
-    // Ensure mute state applies once the player is fully loaded
-    player.addEventListener("loadeddata", () => {
-      player.muted = isMuted;
     });
   </script>
 </body>
