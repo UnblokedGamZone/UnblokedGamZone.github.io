@@ -80,10 +80,33 @@
             color: #666;
             font-size: 0.9em;
         }
+        .back-button {
+            display: block;
+            width: 220px;
+            margin: 40px auto 20px;
+            padding: 14px 20px;
+            background-color: #223e7a;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(34, 62, 122, 0.4);
+        }
+        .back-button:hover {
+            background-color: #2a4d9c;
+            transform: translateY(-3px);
+        }
+        .back-button:active {
+            transform: translateY(1px);
+        }
         @media (max-width: 600px) {
             h1 { font-size: 2.2em; }
             .update { padding: 18px; }
             .update-title { font-size: 1.3em; }
+            .back-button { width: 180px; font-size: 1.1em; }
         }
     </style>
 </head>
@@ -109,6 +132,9 @@
             </ul>
         </div>
         -->
+
+        <!-- Back to Home button -->
+        <a href="https://unblokedgamzone.github.io/" class="back-button">← Back to Home</a>
 
         <footer>
             <p>© 2025 Unblocked Games | Last updated: December 13, 2025</p>
