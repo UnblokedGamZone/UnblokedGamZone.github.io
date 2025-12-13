@@ -37,9 +37,9 @@
             <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
           </button>
           
-          <!-- Mute/Unmute Button -->
+          <!-- Mute Button (icon no longer changes) -->
           <button id="mute-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
-            <img id="mute-img" src="unmute.png" alt="Unmute" class="w-full h-full object-contain">
+            <img src="mute.png" alt="Mute/Unmute" class="w-full h-full object-contain">
           </button>
         </div>
         
@@ -123,20 +123,14 @@
       }
     });
 
-    // Mute functionality with icon swap
+    // Mute functionality (no icon change)
     const muteBtn = document.getElementById("mute-btn");
-    const muteImg = document.getElementById("mute-img");
     let isMuted = false;
 
     muteBtn.addEventListener("click", () => {
       isMuted = !isMuted;
       player.muted = isMuted;
-      muteImg.src = isMuted ? "mute.png" : "unmute.png";
-      muteImg.alt = isMuted ? "Muted" : "Unmuted";
     });
-
-    // Start with sound on (unmuted icon)
-    muteImg.src = "unmute.png";
   </script>
 </body>
 </html>
