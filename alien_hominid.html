@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alien Hominid - Unblocked</title>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle@0.2.0-nightly.2025.8.14"></script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
@@ -15,23 +15,32 @@
     </a>
     <h1 class="text-3xl font-bold">Alien Hominid</h1>
   </header>
-
   <!-- Main Emulator Section -->
   <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
     <!-- Left Ad Space -->
     <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
       <div class="text-center"></div>
     </div>
-    <!-- Ruffle Emulator -->
-    <div class="w-1/2">
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
-        <div class="w-full" style="aspect-ratio: 550/400; max-width: 650px; margin: 0 auto;">
-          <object type="application/x-shockwave-flash" data="alien_hominid.swf" width="100%" height="100%">
-            <param name="movie" value="alien_hominid.swf">
-            <param name="quality" value="high">
-            <param name="allowScriptAccess" value="always">
-            <p>Flash not supported? Install Ruffle or download Flash Player.</p>
-          </object>
+    <!-- Ruffle Emulator + Controls Below -->
+    <div class="w-1/2 flex flex-col items-center">
+      <!-- Emulator Container -->
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black w-full">
+        <div id="ruffle-player" class="w-full" style="aspect-ratio: 550/400; max-width: 650px; margin: 0 auto;"></div>
+      </div>
+      
+      <!-- Fullscreen Button + Description -->
+      <div class="mt-8 w-full flex flex-row gap-8 items-start">
+        <!-- Fullscreen Button -->
+        <div class="flex gap-6">
+          <button id="fullscreen-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
+            <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
+          </button>
+        </div>
+        
+        <!-- Description Panel -->
+        <div class="flex-1 bg-gray-800 rounded-lg p-6 shadow-lg text-lg">
+          <h3 class="text-xl font-bold mb-4">Description</h3>
+          <p>No description yet.</p>
         </div>
       </div>
     </div>
@@ -40,7 +49,7 @@
       <div class="text-center"></div>
     </div>
   </div>
-
+  
   <!-- Game Selection Boxes (4 Larger Squares) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
@@ -59,7 +68,6 @@
       </a>
     </div>
   </div>
-
   <!-- Smaller Icon Boxes (5 Icons) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
@@ -81,5 +89,33 @@
       </a>
     </div>
   </div>
+
+  <script>
+    // Ruffle Emulator Initialization
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    const container = document.getElementById("ruffle-player");
+    
+    player.style.width = '100%';
+    player.style.height = '100%';
+    container.appendChild(player);
+    player.load("alien_hominid.swf");  // Assumes the SWF is in the same folder
+
+    // Fullscreen functionality
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const emulatorContainer = container.parentElement;
+
+    fullscreenBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        if (emulatorContainer.requestFullscreen) emulatorContainer.requestFullscreen();
+        else if (emulatorContainer.webkitRequestFullscreen) emulatorContainer.webkitRequestFullscreen();
+        else if (emulatorContainer.msRequestFullscreen) emulatorContainer.msRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+      }
+    });
+  </script>
 </body>
 </html>
