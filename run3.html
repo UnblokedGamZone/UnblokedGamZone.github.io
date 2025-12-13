@@ -15,7 +15,6 @@
     </a>
     <h1 class="text-3xl font-bold">Run 3</h1>
   </header>
-
   <!-- Main Emulator Section -->
   <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
     <!-- Left Ad Space -->
@@ -24,16 +23,59 @@
     </div>
     <!-- Ruffle Emulator -->
     <div class="w-1/2">
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black relative">
         <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
+        
+        <!-- Fullscreen Button -->
+        <button id="fullscreen-btn" class="absolute bottom-6 right-6 w-24 h-24 cursor-pointer z-10 hover:opacity-80 transition-opacity">
+          <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
+        </button>
+        
         <script>
           // Ruffle Emulator Initialization
           const ruffle = window.RufflePlayer.newest();
           const player = ruffle.createPlayer();
+          const container = document.getElementById("ruffle-player");
+          
           player.style.width = '100%';
           player.style.height = '100%';
-          document.getElementById("ruffle-player").appendChild(player);
+          container.appendChild(player);
           player.load("https://unblokedgamzone.github.io/run3.swf");
+
+          // Fullscreen functionality
+          const fullscreenBtn = document.getElementById("fullscreen-btn");
+          const emulatorContainer = container.parentElement; // the div with border and padding
+
+          fullscreenBtn.addEventListener("click", () => {
+            if (!document.fullscreenElement) {
+              // Enter fullscreen
+              if (emulatorContainer.requestFullscreen) {
+                emulatorContainer.requestFullscreen();
+              } else if (emulatorContainer.webkitRequestFullscreen) { /* Safari */
+                emulatorContainer.webkitRequestFullscreen();
+              } else if (emulatorContainer.msRequestFullscreen) { /* IE11 */
+                emulatorContainer.msRequestFullscreen();
+              }
+            } else {
+              // Exit fullscreen
+              if (document.exitFullscreen) {
+                document.exitFullscreen();
+              } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+              } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+              }
+            }
+          });
+
+          // Optional: Change button appearance when in fullscreen (you can update the image if you have an "exit fullscreen" version)
+          document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+              fullscreenBtn.style.opacity = '0.7';
+            } else {
+              fullscreenBtn.style.opacity = '1';
+            }
+          });
         </script>
       </div>
     </div>
@@ -42,7 +84,6 @@
       <div class="text-center"></div>
     </div>
   </div>
-
   <!-- Game Selection Boxes (4 Larger Squares) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
@@ -61,7 +102,6 @@
       </a>
     </div>
   </div>
-
   <!-- Smaller Icon Boxes (5 Icons) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
