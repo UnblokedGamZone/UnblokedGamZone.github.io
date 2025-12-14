@@ -15,29 +15,33 @@
     </a>
     <h1 class="text-3xl font-bold">Age of War</h1>
   </header>
-
   <!-- Main Emulator Section -->
   <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
     <!-- Left Ad Space -->
     <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
       <div class="text-center"></div>
     </div>
-    <!-- Ruffle Emulator -->
-    <div class="w-1/2">
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black">
+    <!-- Ruffle Emulator + Controls Below -->
+    <div class="w-1/2 flex flex-col items-center">
+      <!-- Emulator Container -->
+      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black w-full">
         <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
-        <script>
-          // Ruffle Emulator Initialization
-          const ruffle = window.RufflePlayer.newest();
-          const player = ruffle.createPlayer();
-          player.style.width = '100%';
-          player.style.height = '100%';
-          document.getElementById("ruffle-player").appendChild(player);
-          player.load("age_of_war.swf").catch(error => {
-            console.error("Error loading SWF file:", error);
-            document.getElementById("ruffle-player").innerHTML = "<p style='color: white; text-align: center;'>Failed to load Age of War. Please ensure the SWF file is in the correct directory.</p>";
-          });
-        </script>
+      </div>
+      
+      <!-- Fullscreen Button + Description -->
+      <div class="mt-8 w-full flex flex-row gap-8 items-start">
+        <!-- Fullscreen Button -->
+        <div class="flex gap-6">
+          <button id="fullscreen-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
+            <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
+          </button>
+        </div>
+        
+        <!-- Description Panel -->
+        <div class="flex-1 bg-gray-800 rounded-lg p-6 shadow-lg text-lg">
+          <h3 class="text-xl font-bold mb-4">Description</h3>
+          <p>No description yet.</p>
+        </div>
       </div>
     </div>
     <!-- Right Ad Space -->
@@ -45,7 +49,7 @@
       <div class="text-center"></div>
     </div>
   </div>
-
+  
   <!-- Game Selection Boxes (4 Larger Squares) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
@@ -64,7 +68,6 @@
       </a>
     </div>
   </div>
-
   <!-- Smaller Icon Boxes (5 Icons) -->
   <div class="w-full max-w-7xl mx-auto my-8 px-4">
     <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
@@ -86,5 +89,33 @@
       </a>
     </div>
   </div>
+
+  <script>
+    // Ruffle Emulator Initialization
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    const container = document.getElementById("ruffle-player");
+    
+    player.style.width = '100%';
+    player.style.height = '100%';
+    container.appendChild(player);
+    player.load("age_of_war.swf");
+
+    // Fullscreen functionality
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const emulatorContainer = container.parentElement;
+
+    fullscreenBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        if (emulatorContainer.requestFullscreen) emulatorContainer.requestFullscreen();
+        else if (emulatorContainer.webkitRequestFullscreen) emulatorContainer.webkitRequestFullscreen();
+        else if (emulatorContainer.msRequestFullscreen) emulatorContainer.msRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+      }
+    });
+  </script>
 </body>
 </html>
