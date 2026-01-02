@@ -1,122 +1,278 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Run 3 Game</title>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run 3 - The Unblocked Game Zone</title>
+    <!-- Ruffle for Flash emulation -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* === ROTATE PROMPT (only shows on phones in portrait) === */
+        #rotate-prompt {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        #rotate-prompt img {
+            width: 120px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        #rotate-prompt p {
+            font-size: 1.4em;
+            color: #00ffaa;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ffaa;
+        }
+        @keyframes pulse {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-90deg) scale(1.1); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        /* Show rotate prompt only on mobile portrait */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            #rotate-prompt {
+                display: flex !important;
+            }
+            main {
+                display: none; /* Hide everything else until rotated */
+            }
+        }
+
+        /* Fixed Navigation */
+        nav {
+            background: #0f0f0f;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 255, 170, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #00ffaa;
+            text-shadow: 0 0 8px #00ffaa;
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover { background: #00ffaa; color: #000; }
+        .hamburger { display: none; font-size: 1.8em; cursor: pointer; color: #00ffaa; }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%; background: #0f0f0f;
+                flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+            }
+            .nav-links.open { max-height: 400px; }
+            .nav-links a { padding: 15px; text-align: center; border-bottom: 1px solid #222; }
+            .hamburger { display: block; }
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1.game-title {
+            text-align: center;
+            font-size: 2.8em;
+            margin: 30px 0 50px;
+            text-shadow: 0 0 10px #00ffaa;
+            color: #00ffaa;
+        }
+        .game-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .emulator-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            background: #000;
+            border: 8px solid #00ffaa;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 255, 170, 0.4);
+        }
+        #ruffle-player {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 80vh;
+        }
+        .description-section { margin-top: 50px; width: 100%; max-width: 1200px; }
+        .description {
+            background: #1e1e1e;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .description h3 { font-size: 1.8em; margin-bottom: 20px; color: #00ffaa; }
+        .description p { font-size: 1.1em; line-height: 1.6; }
+
+        .featured-section { margin-top: 100px; }
+        .featured-section h2 { text-align: center; font-size: 2em; color: #00ffaa; margin-bottom: 40px; }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+        .game-card {
+            background: #1e1e1e;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+        .game-card:hover { transform: translateY(-10px); }
+        .game-card img { width: 100%; height: 180px; object-fit: cover; }
+        .game-info { padding: 18px; text-align: center; }
+        .game-info h3 { margin: 0 0 12px; font-size: 1.4em; }
+        .game-info a {
+            display: inline-block;
+            background: #00ffaa;
+            color: #000;
+            padding: 10px 26px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .game-info a:hover { background: #00cc88; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #0a0a0a;
+            margin-top: 100px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .emulator-wrapper { padding: 10px; border-width: 6px; }
+            #ruffle-player { max-height: 60vh; }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
-  <!-- Header -->
-  <header class="w-full text-center py-4">
-    <a href="https://unblokedgamzone.github.io/">
-      <img src="logo.png" alt="Unblocked Game Zone Logo" class="w-32 mx-auto mb-2">
-    </a>
-    <h1 class="text-3xl font-bold">Run 3</h1>
-  </header>
-  <!-- Main Emulator Section -->
-  <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
-    <!-- Left Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
-      <div class="text-center"></div>
+<body>
+
+    <!-- Rotate to Landscape Prompt (mobile portrait only) -->
+    <div id="rotate-prompt">
+        <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate your phone">
+        <p>Please rotate your phone to landscape for the best experience!</p>
     </div>
-    <!-- Ruffle Emulator + Controls Below -->
-    <div class="w-1/2 flex flex-col items-center">
-      <!-- Emulator Container -->
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black w-full">
-        <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
-      </div>
-      
-      <!-- Buttons on the left, Description on the right -->
-      <div class="mt-8 w-full flex flex-row gap-8 items-start">
-        <!-- Buttons Group (only Fullscreen now) -->
-        <div class="flex gap-6">
-          <!-- Fullscreen Button -->
-          <button id="fullscreen-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
-            <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
-          </button>
+
+    <!-- Fixed Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Unblocked Zone</a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="settings.html">Settings</a>
+            <a href="about.html">About</a>
+            <a href="updates.html">Updates</a>
         </div>
-        
-        <!-- Description Panel -->
-        <div class="flex-1 bg-gray-800 rounded-lg p-6 shadow-lg text-lg">
-          <h3 class="text-xl font-bold mb-4">Description</h3>
-          <p>No description yet.</p>
+    </nav>
+
+    <main>
+        <h1 class="game-title">Run 3</h1>
+
+        <div class="game-container">
+            <div class="emulator-wrapper">
+                <div id="ruffle-player"></div>
+            </div>
+
+            <div class="description-section">
+                <div class="description">
+                    <h3>Description</h3>
+                    <p>Run 3 is an endless runner set in space! Jump and maneuver through tunnels while avoiding gaps and obstacles. Unlock new characters and explore infinite levels in this addictive classic.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- Right Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
-      <div class="text-center"></div>
-    </div>
-  </div>
-  
-  <!-- Game Selection Boxes (4 Larger Squares) -->
-  <div class="w-full max-w-7xl mx-auto my-8 px-4">
-    <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <a href="#featured1" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+1" alt="Game 1" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured2" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+2" alt="Game 2" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured3" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+3" alt="Game 3" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured4" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+4" alt="Game 4" class="w-full h-full object-cover rounded">
-      </a>
-    </div>
-  </div>
-  <!-- Smaller Icon Boxes (5 Icons) -->
-  <div class="w-full max-w-7xl mx-auto my-8 px-4">
-    <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
-    <div class="grid grid-cols-5 gap-2">
-      <a href="https://unblokedgamzone.github.io/" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Home</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/contact.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Contacts</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/forms.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Forms</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/games.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Games</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/settings.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Settings</span>
-      </a>
-    </div>
-  </div>
 
-  <script>
-    // Ruffle Emulator Initialization
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-    const container = document.getElementById("ruffle-player");
-    
-    player.style.width = '100%';
-    player.style.height = '100%';
-    container.appendChild(player);
-    player.load("https://unblokedgamzone.github.io/run3.swf");
+        <div class="featured-section">
+            <h2>More Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="ducklife.png" alt="Duck Life">
+                    <div class="game-info">
+                        <h3>Duck Life</h3>
+                        <a href="duck-life.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="AgeOfWar.jpg" alt="Age Of War">
+                    <div class="game-info">
+                        <h3>Age Of War</h3>
+                        <a href="age_of_war.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="redball4.png" alt="Red Ball 4">
+                    <div class="game-info">
+                        <h3>Red Ball 4</h3>
+                        <a href="redball4.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="learntofly.png" alt="Learn To Fly">
+                    <div class="game-info">
+                        <h3>Learn To Fly</h3>
+                        <a href="learn-to-fly.html">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    // Fullscreen functionality
-    const fullscreenBtn = document.getElementById("fullscreen-btn");
-    const emulatorContainer = container.parentElement;
+    <footer>
+        &copy; 2026 The Unblocked Game Zone | All games are free to play
+    </footer>
 
-    fullscreenBtn.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
-        if (emulatorContainer.requestFullscreen) emulatorContainer.requestFullscreen();
-        else if (emulatorContainer.webkitRequestFullscreen) emulatorContainer.webkitRequestFullscreen();
-        else if (emulatorContainer.msRequestFullscreen) emulatorContainer.msRequestFullscreen();
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
-      }
-    });
-  </script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        // Ruffle setup
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = { autoplay: "on", unmuteOverlay: "hidden" };
+
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle-player");
+        player.style.width = "100%";
+        player.style.height = "100%";
+        container.appendChild(player);
+        player.load("https://unblokedgamzone.github.io/run3.swf");
+    </script>
 </body>
 </html>
