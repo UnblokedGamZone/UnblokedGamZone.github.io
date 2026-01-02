@@ -1,251 +1,503 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unblocked Game Zone — UGZ</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-63RPNCPHQR"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-63RPNCPHQR');
-  </script>
-  <!-- Link to CSS -->
-  <link rel="stylesheet" href="index.css" />
-  <script defer src="index.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unblocked Game Zone</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        /* Navigation Menu */
+        nav {
+            background: #0f0f0f;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 255, 170, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #00ffaa;
+            text-shadow: 0 0 8px #00ffaa;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover {
+            background: #00ffaa;
+            color: #000;
+        }
+        .nav-links a.active {
+            background: #00ffaa;
+            color: #000;
+            font-weight: bold;
+        }
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #00ffaa;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0f0f0f;
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+            }
+            .nav-links.open {
+                max-height: 400px;
+            }
+            .nav-links a {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #222;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        /* Main content - push down below fixed nav */
+        main {
+            margin-top: 70px; /* Space for fixed nav */
+        }
+        header {
+            background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+            padding: 60px 20px 40px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0 0 10px;
+            text-shadow: 0 0 10px #00ffaa;
+        }
+        p.tagline {
+            font-size: 1.2em;
+            margin: 10px 0 30px;
+            color: #aaaaaa;
+        }
+        input#search {
+            padding: 12px 20px;
+            width: 60%;
+            max-width: 500px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+            outline: none;
+        }
+        /* Featured Games */
+        .featured-bar {
+            background: #1a1a1a;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
+        .featured-bar h2 {
+            text-align: center;
+            margin: 0 0 20px;
+            font-size: 1.8em;
+            color: #00ffaa;
+        }
+        .carousel-container {
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            width: calc(250px * 14);
+            animation: autoScroll 35s linear infinite;
+        }
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes autoScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); }
+        }
+        .featured-game {
+            flex: 0 0 220px;
+            background: #242424;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        .featured-game img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+        .featured-game p {
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .featured-game a {
+            display: block;
+            background: #00ffaa;
+            color: #000;
+            padding: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 0 0 12px 12px;
+            transition: background 0.3s;
+        }
+        .featured-game a:hover {
+            background: #00cc88;
+        }
+        /* Popular Games Section */
+        .popular-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .popular-section h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #00ffaa;
+            margin-bottom: 40px;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .game-card {
+            background: #1e1e1e;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+        .game-card:hover {
+            transform: translateY(-10px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .game-info h3 {
+            margin: 0 0 15px;
+            font-size: 1.5em;
+        }
+        .game-info a {
+            display: inline-block;
+            background: #00ffaa;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background 0.3s;
+        }
+        .game-info a:hover {
+            background: #00cc88;
+        }
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #0a0a0a;
+            margin-top: 80px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            input#search { width: 90%; }
+            .featured-game { flex: 0 0 180px; }
+            .carousel-track { gap: 20px; width: calc(200px * 14); }
+            @keyframes autoScroll {
+                100% { transform: translateX(calc(-200px * 7)); }
+            }
+            .game-card img { height: 160px; }
+            main { margin-top: 60px; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Google AdSense (adsbygoogle.js) - PUT IT HERE -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8129386669248979"
-       crossorigin="anonymous"></script>
- 
-  <!-- TOP NAV / HEADER -->
-  <header class="topbar">
-    <div class="brand">
-      <!-- Replaced SVG placeholder with actual logo image -->
-      <img src="logo.png" alt="Unblocked Game Zone Logo" class="site-logo" onclick="window.location.reload()">
-      <div class="site-title">Unblocked Game Zone</div>
-    </div>
-    <nav class="main-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="https://unblokedgamzone.github.io/settings.html" class="nav-link">Settings</a></li>
-        <li><a href="https://unblokedgamzone.github.io/contact.html" class="nav-link">Contacts</a></li>
-        <li><a href="https://unblokedgamzone.github.io/forms.html" class="nav-link">Update Log</a></li>
-        <li><a href="#" class="nav-link">Extra</a></li>
-        <li><a href="#" class="nav-link">Home</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="page">
-    <div class="creator-picked-container">
-      <h1 class="page-title">Creator Picked Games</h1>
-      <section class="carousel" aria-label="Featured creator picked games">
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <article class="panel" data-index="0">
-              <a href="https://unblokedgamzone.github.io/run3" class="panel-link">
-                <div class="panel-content">
-                  <img src="run3.png" alt="Run 3" class="panel-image" />
-                  <h2>Run 3</h2>
-                  <p>Endless running adventure in space!</p>
-                </div>
-              </a>
-            </article>
-            <article class="panel" data-index="1">
-              <a href="https://unblokedgamzone.github.io/duck-life" class="panel-link">
-                <div class="panel-content">
-                  <img src="ducklife.png" alt="Duck Life" class="panel-image" />
-                  <h2>Duck Life</h2>
-                  <p>Train your duck to become a champion!</p>
-                </div>
-              </a>
-            </article>
-            <article class="panel" data-index="2">
-              <a href="https://unblokedgamzone.github.io/age_of_war" class="panel-link">
-                <div class="panel-content">
-                  <img src="AgeOfWar.jpg" alt="Age Of War" class="panel-image" />
-                  <h2>Age Of War</h2>
-                  <p>Evolve through ages and defeat enemies!</p>
-                </div>
-              </a>
-            </article>
-          </div>
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="index.html" class="logo">Unblocked Zone</a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Home</a>
+            <a href="settings.html">Settings</a>
+            <a href="about.html">About</a>
+            <a href="updates.html">Updates</a>
         </div>
-        <div class="carousel-indicators" aria-hidden="false"></div>
-      </section>
-    </div>
-    <section class="all-games-section">
-      <div class="all-games-container">
-        <h2 class="all-games-title">ALL GAMES</h2>
-      </div>
-    </section>
-    <section class="search-area">
-      <input id="search" class="search-input" type="search" placeholder="Search games..." />
-      <button class="search-btn">Search</button>
-    </section>
-    <section class="game-grid" aria-label="Game gallery">
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/run3" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="run3.png" alt="Run 3" class="game-logo" />
-            <span class="game-name">Run 3</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/alien_hominid" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="2025_08_15_0n8_Kleki.png" alt="Alien Hominid" class="game-logo" />
-            <span class="game-name">Alien Hominid</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/duck-life" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="ducklife.png" alt="Duck Life" class="game-logo" />
-            <span class="game-name">Duck Life</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="easygame.png" alt="Worlds Hardest Game" class="game-logo" />
-            <span class="game-name">Worlds Hardest Game</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/ducklife2worldchampion.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="2025_08_18_0xg_Kleki.png" alt="Duck Life 2" class="game-logo" />
-            <span class="game-name">Duck Life 2</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/redball4" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="redball4.png" alt="Red Ball 4" class="game-logo" />
-            <span class="game-name">Red Ball 4</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/AwesomeTanks" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="2025_08_22_0tk_Kleki.png" alt="Awesome Tanks" class="game-logo" />
-            <span class="game-name">Awesome Tanks</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/age_of_war" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="AgeOfWar.jpg" alt="Age Of War" class="game-logo" />
-            <span class="game-name">Age Of War</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/bloxorz" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="blox123.png" alt="bloxorz" class="game-logo" />
-            <span class="game-name">bloxorz</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/sticky-ninja-academy.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="unnamed.png" alt="Sticky Ninja" class="game-logo" />
-            <span class="game-name">Sticky Ninja</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/learn-to-fly" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="learntofly.png" alt="Learn To Fly" class="game-logo" />
-            <span class="game-name">Learn To Fly</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/learn2fly" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="l2f.png" alt="Learn 2 Fly" class="game-logo" />
-            <span class="game-name">Learn 2 Fly</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/n" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="n.png" alt="N Game" class="game-logo" />
-            <span class="game-name">N Game</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/burrito_bison_revenge" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="burrito-bison-revenge.png" alt="Burrito Bison Revenge" class="game-logo" />
-            <span class="game-name">Burrito Bison Revenge</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/Learn-To-Fly-3.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="ltf3.jpg" alt="Learn To Fly 3" class="game-logo" />
-            <span class="game-name">Learn To Fly 3</span>
-          </div>
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/bloonstd.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="Bloons_TD_iOS_Logo.jpg" alt="Bloons Tower Defence 1" class="game-logo" />
-            <span class="game-name">BTD1</span>
-          </div>
-        </a>
-      </div>
-     
-      </div>
-      <div class="game-card">
-        <a href="https://unblokedgamzone.github.io/bloonstd.html" class="game-logo-link">
-          <div class="game-card-inner">
-            <img src="btd2.png" alt="Bloons Tower Defence 2" class="game-logo" />
-            <span class="game-name">BTD2</span>
-          </div>
-        </a>
-      </div>
-     
-    </section>
-    <section class="icon-section">
-      <nav class="icon-nav" aria-label="Footer navigation">
-        <a href="#" class="icon-link" title="Settings">
-          <img src="https://via.placeholder.com/40" alt="Settings Icon" class="icon-image" />
-        </a>
-        <a href="https://unblokedgamzone.github.io/contact.html" class="icon-link" title="Contacts">
-          <img src="https://via.placeholder.com/40" alt="Contacts Icon" class="icon-image" />
-        </a>
-        <a href="#" class="icon-link" title="Forms">
-          <img src="https://via.placeholder.com/40" alt="Forms Icon" class="icon-image" />
-        </a>
-        <a href="#" class="icon-link" title="Extra">
-          <img src="https://via.placeholder.com/40" alt="Extra Icon" class="icon-image" />
-        </a>
-        <a href="#" class="icon-link" title="Home">
-          <img src="https://via.placeholder.com/40" alt="Home Icon" class="icon-image" />
-        </a>
-      </nav>
-    </section>
-  </main>
-  <footer class="bottom-bar"></footer>
+    </nav>
+    <main>
+        <header>
+            <h1>The Unblocked Game Zone</h1>
+            <p class="tagline">Play hundreds of free games anytime – no blocks, no downloads!</p>
+            <input type="text" id="search" placeholder="Search for games...">
+        </header>
+        <!-- Featured Games (Creator Picked) -->
+        <div class="featured-bar">
+            <h2>Featured Games</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Run 3 -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Run-3-OG-Image.jpg" alt="Run 3">
+                        <p>Run 3</p>
+                        <a href="https://unblokedgamzone.github.io/run3">Play Now</a>
+                    </div>
+                    <!-- Duck Life -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Duck-Life-OG-Image.jpg" alt="Duck Life">
+                        <p>Duck Life</p>
+                        <a href="https://unblokedgamzone.github.io/duck-life">Play Now</a>
+                    </div>
+                    <!-- Age of War -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Age-of-War-OG-Image.jpg" alt="Age Of War">
+                        <p>Age Of War</p>
+                        <a href="https://unblokedgamzone.github.io/age_of_war">Play Now</a>
+                    </div>
+                    <!-- Alien Hominid -->
+                    <div class="featured-game">
+                        <img src="https://www.thebehemoth.com/wp-content/uploads/2024/08/AHHD_KeyArt_1920x1080.jpg" alt="Alien Hominid">
+                        <p>Alien Hominid</p>
+                        <a href="https://unblokedgamzone.github.io/alien_hominid">Play Now</a>
+                    </div>
+                    <!-- Worlds Hardest Game -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Worlds-Hardest-Game-OG-Image.jpg" alt="Worlds Hardest Game">
+                        <p>Worlds Hardest Game</p>
+                        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html">Play Now</a>
+                    </div>
+                    <!-- Red Ball 4 -->
+                    <div class="featured-game">
+                        <img src="https://play.google.com/store/apps/details?id=com.FDGEntertainment.RedBall4&hl=en_US" alt="Red Ball 4"> <!-- Placeholder; use a better one if available -->
+                        <p>Red Ball 4</p>
+                        <a href="https://unblokedgamzone.github.io/redball4">Play Now</a>
+                    </div>
+                    <!-- Awesome Tanks -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Awesome-Tanks-OG-Image.jpg" alt="Awesome Tanks">
+                        <p>Awesome Tanks</p>
+                        <a href="https://unblokedgamzone.github.io/AwesomeTanks">Play Now</a>
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Run-3-OG-Image.jpg" alt="Run 3">
+                        <p>Run 3</p>
+                        <a href="https://unblokedgamzone.github.io/run3">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Duck-Life-OG-Image.jpg" alt="Duck Life">
+                        <p>Duck Life</p>
+                        <a href="https://unblokedgamzone.github.io/duck-life">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Age-of-War-OG-Image.jpg" alt="Age Of War">
+                        <p>Age Of War</p>
+                        <a href="https://unblokedgamzone.github.io/age_of_war">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://www.thebehemoth.com/wp-content/uploads/2024/08/AHHD_KeyArt_1920x1080.jpg" alt="Alien Hominid">
+                        <p>Alien Hominid</p>
+                        <a href="https://unblokedgamzone.github.io/alien_hominid">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Worlds-Hardest-Game-OG-Image.jpg" alt="Worlds Hardest Game">
+                        <p>Worlds Hardest Game</p>
+                        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://play.google.com/store/apps/details?id=com.FDGEntertainment.RedBall4&hl=en_US" alt="Red Ball 4">
+                        <p>Red Ball 4</p>
+                        <a href="https://unblokedgamzone.github.io/redball4">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Awesome-Tanks-OG-Image.jpg" alt="Awesome Tanks">
+                        <p>Awesome Tanks</p>
+                        <a href="https://unblokedgamzone.github.io/AwesomeTanks">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popular Games Grid -->
+        <div class="popular-section">
+            <h2>Popular Games</h2>
+            <div class="games-grid" id="gamesGrid">
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Run-3-OG-Image.jpg" alt="Run 3">
+                    <div class="game-info">
+                        <h3>Run 3</h3>
+                        <a href="https://unblokedgamzone.github.io/run3">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.thebehemoth.com/wp-content/uploads/2024/08/AHHD_KeyArt_1920x1080.jpg" alt="Alien Hominid">
+                    <div class="game-info">
+                        <h3>Alien Hominid</h3>
+                        <a href="https://unblokedgamzone.github.io/alien_hominid">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Duck-Life-OG-Image.jpg" alt="Duck Life">
+                    <div class="game-info">
+                        <h3>Duck Life</h3>
+                        <a href="https://unblokedgamzone.github.io/duck-life">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Worlds-Hardest-Game-OG-Image.jpg" alt="Worlds Hardest Game">
+                    <div class="game-info">
+                        <h3>Worlds Hardest Game</h3>
+                        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/Duck-Life-2-OG-Image.jpg" alt="Duck Life 2"> <!-- Approximate -->
+                    <div class="game-info">
+                        <h3>Duck Life 2</h3>
+                        <a href="https://unblokedgamzone.github.io/ducklife2worldchampion.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://play-lh.googleusercontent.com/5p9i5K9b7r0jK8m7z3z0z8z0z8z0z8z0=w526-h296-rw" alt="Red Ball 4"> <!-- Placeholder -->
+                    <div class="game-info">
+                        <h3>Red Ball 4</h3>
+                        <a href="https://unblokedgamzone.github.io/redball4">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Awesome-Tanks-OG-Image.jpg" alt="Awesome Tanks">
+                    <div class="game-info">
+                        <h3>Awesome Tanks</h3>
+                        <a href="https://unblokedgamzone.github.io/AwesomeTanks">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Age-of-War-OG-Image.jpg" alt="Age Of War">
+                    <div class="game-info">
+                        <h3>Age Of War</h3>
+                        <a href="https://unblokedgamzone.github.io/age_of_war">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Bloxorz-OG-Image.jpg" alt="Bloxorz">
+                    <div class="game-info">
+                        <h3>Bloxorz</h3>
+                        <a href="https://unblokedgamzone.github.io/bloxorz">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Sticky-Ninja-Academy-OG-Image.jpg" alt="Sticky Ninja">
+                    <div class="game-info">
+                        <h3>Sticky Ninja</h3>
+                        <a href="https://unblokedgamzone.github.io/sticky-ninja-academy.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/Learn-to-Fly-OG-Image.jpg" alt="Learn To Fly">
+                    <div class="game-info">
+                        <h3>Learn To Fly</h3>
+                        <a href="https://unblokedgamzone.github.io/learn-to-fly">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/Learn-to-Fly-2-OG-Image.jpg" alt="Learn 2 Fly">
+                    <div class="game-info">
+                        <h3>Learn 2 Fly</h3>
+                        <a href="https://unblokedgamzone.github.io/learn2fly">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/styles/game_thumbnail/public/2023-08/N-OG-Image.jpg" alt="N Game">
+                    <div class="game-info">
+                        <h3>N Game</h3>
+                        <a href="https://unblokedgamzone.github.io/n">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://www.coolmathgames.com/sites/default/files/Burrito-Bison-Revenge-OG-Image.jpg" alt="Burrito Bison Revenge">
+                    <div class="game-info">
+                        <h3>Burrito Bison Revenge</h3>
+                        <a href="https://unblokedgamzone.github.io/burrito_bison_revenge">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://store.steampowered.com/app/589870/Learn_to_Fly_3/" alt="Learn To Fly 3">
+                    <div class="game-info">
+                        <h3>Learn To Fly 3</h3>
+                        <a href="https://unblokedgamzone.github.io/Learn-To-Fly-3.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://ninjakiwi.com/images/games/bloons-td-1/icon.jpg" alt="BTD1">
+                    <div class="game-info">
+                        <h3>BTD1</h3>
+                        <a href="https://unblokedgamzone.github.io/bloonstd.html">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://ninjakiwi.com/images/games/bloons-td-2/icon.jpg" alt="BTD2">
+                    <div class="game-info">
+                        <h3>BTD2</h3>
+                        <a href="https://unblokedgamzone.github.io/bloonstd.html">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2026 The Unblocked Game Zone | All games are free to play
+    </footer>
+    <script>
+        // Hamburger menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+        // Search filter
+        document.getElementById('search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
