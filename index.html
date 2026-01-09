@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Unblocked Game Zone</title>
+    <!-- Added Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
             margin: 0;
@@ -12,7 +17,7 @@
             color: #ffffff;
             min-height: 100vh;
         }
-        /* Navigation Menu */
+        /* Navigation Menu - Moved links slightly left */
         nav {
             background: #0f0f0f;
             padding: 15px 20px;
@@ -31,10 +36,13 @@
             color: #00ffaa;
             text-shadow: 0 0 8px #00ffaa;
             text-decoration: none;
+            margin-left: 20px; /* Extra spacing from far left */
         }
         .nav-links {
             display: flex;
             gap: 30px;
+            margin-right: auto; /* Pushes hamburger to the right */
+            margin-left: 80px; /* Moves the entire menu group leftward from center */
         }
         .nav-links a {
             color: #ffffff;
@@ -59,6 +67,7 @@
             font-size: 1.8em;
             cursor: pointer;
             color: #00ffaa;
+            margin-right: 20px;
         }
         @media (max-width: 768px) {
             .nav-links {
@@ -72,6 +81,7 @@
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease;
+                margin-left: 0; /* Reset for mobile */
             }
             .nav-links.open {
                 max-height: 400px;
@@ -94,6 +104,7 @@
             padding: 60px 20px 40px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            position: relative;
         }
         h1 {
             font-size: 3em;
@@ -105,14 +116,56 @@
             margin: 10px 0 30px;
             color: #aaaaaa;
         }
-        input#search {
-            padding: 12px 20px;
+        /* Search container for positioning dropdown */
+        .search-container {
+            position: relative;
+            display: inline-block;
             width: 60%;
             max-width: 500px;
+        }
+        input#search {
+            padding: 12px 20px;
+            width: 100%;
             border: none;
             border-radius: 30px;
             font-size: 1em;
             outline: none;
+        }
+        /* Search suggestions dropdown */
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            max-height: 300px;
+            overflow-y: auto;
+            width: 300px;
+            z-index: 100;
+            display: none;
+        }
+        .suggestion-item {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .suggestion-item:hover {
+            background: #00ffaa;
+            color: #000;
+        }
+        .suggestion-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .suggestion-item span {
+            font-weight: bold;
         }
         /* Featured Games */
         .featured-bar {
@@ -131,6 +184,7 @@
         .carousel-container {
             overflow: hidden;
             width: 100%;
+ 
         }
         .carousel-track {
             display: flex;
@@ -176,11 +230,11 @@
         .featured-game a:hover {
             background: #00cc88;
         }
-        /* Popular Games Section - Updated */
+        /* Popular Games Section */
         .popular-section {
             max-width: 1200px;
             margin: 60px auto;
-            padding: 0 40px; /* Increased side padding for more space from edges */
+            padding: 0 40px;
         }
         .popular-section h2 {
             text-align: center;
@@ -190,7 +244,7 @@
         }
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Smaller min width: 250px instead of 280px */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
         }
         .game-card {
@@ -205,22 +259,22 @@
         }
         .game-card img {
             width: 100%;
-            height: 180px; /* Slightly reduced image height for smaller cards */
+            height: 180px;
             object-fit: cover;
         }
         .game-info {
-            padding: 18px; /* Slightly less padding inside */
+            padding: 18px;
             text-align: center;
         }
         .game-info h3 {
             margin: 0 0 12px;
-            font-size: 1.4em; /* Slightly smaller title */
+            font-size: 1.4em;
         }
         .game-info a {
             display: inline-block;
             background: #00ffaa;
             color: #000;
-            padding: 10px 26px; /* Slightly smaller button */
+            padding: 10px 26px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
@@ -240,15 +294,17 @@
         }
         @media (max-width: 768px) {
             h1 { font-size: 2.2em; }
-            input#search { width: 90%; }
+            .search-container { width: 90%; }
+            #suggestions { width: 100%; right: 0; }
             .featured-game { flex: 0 0 180px; }
             .carousel-track { gap: 20px; width: calc(200px * 14); }
             @keyframes autoScroll {
                 100% { transform: translateX(calc(-200px * 7)); }
             }
             .game-card img { height: 150px; }
-            .popular-section { padding: 0 20px; } /* Less extreme padding on mobile */
+            .popular-section { padding: 0 20px; }
             main { margin-top: 60px; }
+            .logo { margin-left: 10px; }
         }
     </style>
 </head>
@@ -256,62 +312,59 @@
     <!-- Navigation Menu -->
     <nav>
         <a href="index.html" class="logo">Unblocked Zone</a>
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navLinks">
             <a href="index.html" class="active">Home</a>
             <a href="settings.html">Settings</a>
             <a href="about.html">About</a>
             <a href="updates.html">Updates</a>
         </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
     </nav>
     <main>
         <header>
             <h1>The Unblocked Game Zone</h1>
             <p class="tagline">Play hundreds of free games anytime – no blocks, no downloads!</p>
-            <input type="text" id="search" placeholder="Search for games...">
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search for games..." autocomplete="off">
+                <div id="suggestions"></div>
+            </div>
         </header>
         <!-- Featured Games -->
         <div class="featured-bar">
             <h2>Featured Games</h2>
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <!-- Run 3 -->
+                    <!-- Featured games remain unchanged -->
                     <div class="featured-game">
                         <img src="run3.png" alt="Run 3">
                         <p>Run 3</p>
                         <a href="https://unblokedgamzone.github.io/run3">Play Now</a>
                     </div>
-                    <!-- Duck Life -->
                     <div class="featured-game">
                         <img src="ducklife.png" alt="Duck Life">
                         <p>Duck Life</p>
                         <a href="https://unblokedgamzone.github.io/duck-life">Play Now</a>
                     </div>
-                    <!-- Age Of War -->
                     <div class="featured-game">
                         <img src="AgeOfWar.jpg" alt="Age Of War">
                         <p>Age Of War</p>
                         <a href="https://unblokedgamzone.github.io/age_of_war">Play Now</a>
                     </div>
-                    <!-- Alien Hominid -->
                     <div class="featured-game">
                         <img src="2025_08_15_0n8_Kleki.png" alt="Alien Hominid">
                         <p>Alien Hominid</p>
                         <a href="https://unblokedgamzone.github.io/alien_hominid">Play Now</a>
                     </div>
-                    <!-- Worlds Hardest Game -->
                     <div class="featured-game">
                         <img src="easygame.png" alt="Worlds Hardest Game">
                         <p>Worlds Hardest Game</p>
                         <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html">Play Now</a>
                     </div>
-                    <!-- Red Ball 4 -->
                     <div class="featured-game">
                         <img src="redball4.png" alt="Red Ball 4">
                         <p>Red Ball 4</p>
                         <a href="https://unblokedgamzone.github.io/redball4">Play Now</a>
                     </div>
-                    <!-- Awesome Tanks -->
                     <div class="featured-game">
                         <img src="2025_08_22_0tk_Kleki.png" alt="Awesome Tanks">
                         <p>Awesome Tanks</p>
@@ -360,6 +413,7 @@
         <div class="popular-section">
             <h2>Popular Games</h2>
             <div class="games-grid" id="gamesGrid">
+                <!-- Grid cards remain unchanged -->
                 <div class="game-card">
                     <img src="run3.png" alt="Run 3">
                     <div class="game-info">
@@ -490,14 +544,78 @@
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('open');
         }
-        // Search filter
-        document.getElementById('search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.game-card');
-            cards.forEach(card => {
+
+        // Games data
+        const games = [
+            {"name": "Run 3", "url": "https://unblokedgamzone.github.io/run3", "img": "run3.png"},
+            {"name": "Duck Life", "url": "https://unblokedgamzone.github.io/duck-life", "img": "ducklife.png"},
+            {"name": "Age Of War", "url": "https://unblokedgamzone.github.io/age_of_war", "img": "AgeOfWar.jpg"},
+            {"name": "Alien Hominid", "url": "https://unblokedgamzone.github.io/alien_hominid", "img": "2025_08_15_0n8_Kleki.png"},
+            {"name": "Worlds Hardest Game", "url": "https://unblokedgamzone.github.io/the-worlds-hardest-game.html", "img": "easygame.png"},
+            {"name": "Red Ball 4", "url": "https://unblokedgamzone.github.io/redball4", "img": "redball4.png"},
+            {"name": "Awesome Tanks", "url": "https://unblokedgamzone.github.io/AwesomeTanks", "img": "2025_08_22_0tk_Kleki.png"},
+            {"name": "Duck Life 2", "url": "https://unblokedgamzone.github.io/ducklife2worldchampion.html", "img": "2025_08_18_0xg_Kleki.png"},
+            {"name": "Bloxorz", "url": "https://unblokedgamzone.github.io/bloxorz", "img": "blox123.png"},
+            {"name": "Sticky Ninja", "url": "https://unblokedgamzone.github.io/sticky-ninja-academy.html", "img": "unnamed.png"},
+            {"name": "Learn To Fly", "url": "https://unblokedgamzone.github.io/learn-to-fly", "img": "learntofly.png"},
+            {"name": "Learn 2 Fly", "url": "https://unblokedgamzone.github.io/learn2fly", "img": "l2f.png"},
+            {"name": "N Game", "url": "https://unblokedgamzone.github.io/n", "img": "n.png"},
+            {"name": "Burrito Bison Revenge", "url": "https://unblokedgamzone.github.io/burrito_bison_revenge", "img": "burrito-bison-revenge.png"},
+            {"name": "Learn To Fly 3", "url": "https://unblokedgamzone.github.io/Learn-To-Fly-3.html", "img": "ltf3.jpg"},
+            {"name": "BTD1", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "Bloons_TD_iOS_Logo.jpg"},
+            {"name": "BTD2", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "btd2.png"}
+        ];
+
+        const searchInput = document.getElementById('search');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.trim().toLowerCase();
+            suggestionsBox.innerHTML = '';
+            if (query === '') {
+                suggestionsBox.style.display = 'none';
+                // Restore all grid cards
+                document.querySelectorAll('.game-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+                return;
+            }
+
+            const matches = games.filter(game => game.name.toLowerCase().includes(query)).slice(0, 8);
+
+            if (matches.length === 0) {
+                suggestionsBox.style.display = 'none';
+                // Optional: hide grid cards if no match, or keep showing all
+                return;
+            }
+
+            matches.forEach(game => {
+                const item = document.createElement('div');
+                item.classList.add('suggestion-item');
+                item.innerHTML = `
+                    <img src="${game.img}" alt="${game.name}">
+                    <span>${game.name}</span>
+                `;
+                item.addEventListener('click', () => {
+                    window.location.href = game.url;
+                });
+                suggestionsBox.appendChild(item);
+            });
+
+            suggestionsBox.style.display = 'block';
+
+            // Also filter the popular games grid
+            document.querySelectorAll('.game-card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 card.style.display = title.includes(query) ? 'block' : 'none';
             });
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                suggestionsBox.style.display = 'none';
+            }
         });
     </script>
 </body>
