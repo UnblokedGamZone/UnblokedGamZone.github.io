@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Duck Life • Unblocked Game Zone</title>
+    <title>World's Hardest Game • Unblocked Game Zone</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         * {
@@ -171,7 +171,7 @@
 <div id="rotate-prompt">
     <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
     <h2>Please rotate your device</h2>
-    <p>Landscape mode gives the best experience for playing Duck Life!</p>
+    <p>Landscape mode gives the best experience for playing World's Hardest Game!</p>
 </div>
 
 <div class="top-bar">
@@ -185,40 +185,38 @@
 </div>
 
 <main>
-    <h1>Duck Life</h1>
+    <h1>World's Hardest Game</h1>
 
     <div class="game-area">
         <div id="ruffle-container"></div>
     </div>
 
     <div class="game-info-card">
-        <h2>About Duck Life</h2>
+        <h2>About World's Hardest Game</h2>
         <p>
-            Raise your very own duckling from an egg and train it to become the ultimate racing champion! 
-            <strong>Duck Life</strong> is the original classic that started the beloved series by Wix Games. 
-            Feed your duck, train its running, swimming, and flying skills through fun mini-games, buy cool hats & accessories, 
-            and compete in races to earn money and rebuild your tornado-destroyed farm. A timeless, addictive mix of simulation, training, and racing!
+            The legendary rage-inducing classic that lives up to its name! Guide a small orange square through 30 brutally difficult levels filled with moving obstacles, precise jumps, and zero room for error. 
+            One touch = instant death — expect to die hundreds (or thousands) of times trying to collect all the coins and reach the exit. 
+            Known for its minimalist design, unforgiving difficulty, and that iconic chiptune soundtrack, this is the original Flash game that started countless "hardest game" challenges and inspired tons of sequels and imitations.
         </p>
 
         <div class="meta">
-            <div>Original Creator / Developer: <span>Wix Games (Simon Wix & team)</span></div>
-            <div>First Released: <span>2007</span> (initial version; Flash versions popularized ~2010)</div>
+            <div>Original Creator: <span>Total Jerkface</span></div>
+            <div>First Released: <span>2008</span></div>
             <div>Current Version on site: <span>Classic Flash version (via Ruffle emulator)</span></div>
             <div>Added to Unblocked Game Zone: <span>January 2026</span></div>
         </div>
 
         <p style="margin-top: 1.6rem;">
             <strong>Controls:</strong><br>
-            • Arrow Keys / Mouse → Navigate menus & control duck in training<br>
-            • Up Arrow / Click → Jump / Perform action in running & flying minigames<br>
-            • Left & Right Arrows → Steer while swimming or flying<br>
-            • Down Arrow → Dive (swimming training)<br><br>
-            <strong>Pro Tip:</strong> Collect coins during training to buy better food & cosmetics — balance energy & skill growth!
+            • Arrow Keys / WASD → Move the square<br>
+            • Collect all yellow coins → Must collect every coin to open the exit door<br>
+            • Reach the green exit → Only opens after all coins are collected<br><br>
+            <strong>Pro Tip:</strong> Patience is key — memorize patterns, practice tiny movements, and take breaks when you're about to rage-quit!
         </p>
 
         <p style="margin-top: 2.2rem; color: #888; font-size: 0.95rem;">
             This site hosts the classic Flash version for nostalgic & educational purposes only.<br>
-            Original game © Wix Games • <a href="https://wixgames.co.uk/" style="color:#00cc99; text-decoration:none;">wixgames.co.uk</a>
+            Original game © Total Jerkface • <a href="https://www.totaljerkface.com/" style="color:#00cc99; text-decoration:none;">totaljerkface.com</a>
         </p>
     </div>
 </main>
@@ -237,7 +235,7 @@ const player = ruffle.createPlayer();
 player.style.width = "100%";
 player.style.height = "100%";
 document.getElementById("ruffle-container").appendChild(player);
-player.load("https://unblokedgamzone.github.io/duck-life.swf");  // ← Update path if needed!
+player.load("https://unblokedgamzone.github.io/worlds-hardest-game.swf");  // ← Adjust if your SWF filename is different (common: worlds-hardest-game.swf)
 
 // Fullscreen functionality
 const fullscreenBtn = document.getElementById("fullscreenBtn");
