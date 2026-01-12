@@ -1,278 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Run 3 - The Unblocked Game Zone</title>
-    <!-- Ruffle for Flash emulation -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Run 3 • Unblocked Game Zone</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacC, "Segoe UI", Roboto, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* === ROTATE PROMPT (only shows on phones in portrait) === */
-        #rotate-prompt {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-        #rotate-prompt img {
-            width: 120px;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-        #rotate-prompt p {
-            font-size: 1.4em;
-            color: #00ffaa;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ffaa;
-        }
-        @keyframes pulse {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(-90deg) scale(1.1); }
-            100% { transform: rotate(0deg) scale(1); }
-        }
-
-        /* Show rotate prompt only on mobile portrait */
-        @media (max-width: 1024px) and (orientation: portrait) {
-            #rotate-prompt {
-                display: flex !important;
-            }
-            main {
-                display: none; /* Hide everything else until rotated */
-            }
-        }
-
-        /* Fixed Navigation */
-        nav {
-            background: #0f0f0f;
-            padding: 15px 20px;
+        /* Top Bar */
+        .top-bar {
             position: fixed;
             top: 0;
-            width: 100%;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(15, 15, 15, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 255, 170, 0.1);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
         }
-        .logo {
-            font-size: 1.6em;
-            font-weight: bold;
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: #00ffaa;
-            text-shadow: 0 0 8px #00ffaa;
             text-decoration: none;
-        }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1em;
+            font-weight: 600;
             padding: 8px 16px;
             border-radius: 8px;
-            transition: all 0.3s;
+            transition: all 0.25s;
         }
-        .nav-links a:hover { background: #00ffaa; color: #000; }
-        .hamburger { display: none; font-size: 1.8em; cursor: pointer; color: #00ffaa; }
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%; background: #0f0f0f;
-                flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
-            }
-            .nav-links.open { max-height: 400px; }
-            .nav-links a { padding: 15px; text-align: center; border-bottom: 1px solid #222; }
-            .hamburger { display: block; }
+
+        .back-btn:hover {
+            background: rgba(0, 255, 170, 0.15);
+        }
+
+        .back-btn span {
+            font-size: 1.4em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00ffaa;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+
+        .btn:hover {
+            background: rgba(0, 255, 170, 0.25);
+            border-color: #00ffaa;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         main {
             margin-top: 80px;
-            padding: 20px;
+            padding: 20px 20px 60px;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
         }
-        h1.game-title {
+
+        h1 {
             text-align: center;
-            font-size: 2.8em;
-            margin: 30px 0 50px;
-            text-shadow: 0 0 10px #00ffaa;
+            font-size: clamp(2.1rem, 6vw, 3.6rem);
             color: #00ffaa;
+            margin: 30px 0 40px;
+            text-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+            letter-spacing: -1px;
         }
-        .game-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
-        .emulator-wrapper {
+
+        .game-area {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
+            margin: 0 auto 50px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
             background: #000;
-            border: 8px solid #00ffaa;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 255, 170, 0.4);
+            border: 2px solid #222;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
         }
-        #ruffle-player {
+
+        #ruffle-container {
             width: 100%;
             aspect-ratio: 4 / 3;
-            max-height: 80vh;
+            max-height: 82vh;
+            margin: 0 auto;
         }
-        .description-section { margin-top: 50px; width: 100%; max-width: 1200px; }
-        .description {
-            background: #1e1e1e;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-        .description h3 { font-size: 1.8em; margin-bottom: 20px; color: #00ffaa; }
-        .description p { font-size: 1.1em; line-height: 1.6; }
 
-        .featured-section { margin-top: 100px; }
-        .featured-section h2 { text-align: center; font-size: 2em; color: #00ffaa; margin-bottom: 40px; }
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+        /* Description */
+        .game-info-card {
+            background: #181818;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid #333;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .game-info-card h2 {
+            color: #00ffaa;
+            margin-bottom: 1.2rem;
+            font-size: 1.8rem;
+        }
+
+        .meta {
+            color: #888;
+            font-size: 0.95rem;
+            margin: 1.6rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .meta span {
+            color: #aaa;
+        }
+
+        /* Mobile rotate prompt */
+        #rotate-prompt {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-        }
-        .game-card {
-            background: #1e1e1e;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-            transition: transform 0.3s;
-        }
-        .game-card:hover { transform: translateY(-10px); }
-        .game-card img { width: 100%; height: 180px; object-fit: cover; }
-        .game-info { padding: 18px; text-align: center; }
-        .game-info h3 { margin: 0 0 12px; font-size: 1.4em; }
-        .game-info a {
-            display: inline-block;
-            background: #00ffaa;
-            color: #000;
-            padding: 10px 26px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1em;
-            transition: background 0.3s;
-        }
-        .game-info a:hover { background: #00cc88; }
-
-        footer {
+            color: #00ffaa;
             text-align: center;
-            padding: 40px;
-            background: #0a0a0a;
-            margin-top: 100px;
-            font-size: 0.9em;
-            color: #666;
+            padding: 30px;
         }
-        @media (max-width: 768px) {
-            .emulator-wrapper { padding: 10px; border-width: 6px; }
-            #ruffle-player { max-height: 60vh; }
+
+        #rotate-prompt img {
+            width: 110px;
+            margin-bottom: 30px;
+            animation: pulseRotate 2.2s infinite;
+        }
+
+        @keyframes pulseRotate {
+            0%,100% { transform: rotate(0deg) scale(1); }
+            50%     { transform: rotate(-90deg) scale(1.12); }
+        }
+
+        @media (max-width: 1024px) and (orientation: portrait) {
+            #rotate-prompt { display: flex !important; }
+            main, .top-bar { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            .top-bar { height: 56px; padding: 0 12px; }
+            .game-info-card { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Rotate to Landscape Prompt (mobile portrait only) -->
-    <div id="rotate-prompt">
-        <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate your phone">
-        <p>Please rotate your phone to landscape for the best experience!</p>
+<div id="rotate-prompt">
+    <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
+    <h2>Please rotate your device</h2>
+    <p>Landscape mode gives the best experience for playing Run 3!</p>
+</div>
+
+<div class="top-bar">
+    <a href="https://unblokedgamzone.github.io/" class="back-btn">
+        <span>←</span> Back to Home
+    </a>
+
+    <div class="controls">
+        <button class="btn" id="fullscreenBtn">Fullscreen</button>
+    </div>
+</div>
+
+<main>
+    <h1>Run 3</h1>
+
+    <div class="game-area">
+        <div id="ruffle-container"></div>
     </div>
 
-    <!-- Fixed Navigation -->
-    <nav>
-        <a href="index.html" class="logo">Unblocked Zone</a>
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html">Home</a>
-            <a href="settings.html">Settings</a>
-            <a href="about.html">About</a>
-            <a href="updates.html">Updates</a>
-        </div>
-    </nav>
+    <div class="game-info-card">
+        <h2>About Run 3</h2>
+        <p>
+            Run 3 is a legendary endless runner set in the depths of space! 
+            Navigate through twisting tunnels, leap over massive gaps, 
+            switch gravity, and try to survive as long as possible.
+            Unlock new characters with unique abilities and discover 
+            increasingly difficult levels in this incredibly addictive classic.
+        </p>
 
-    <main>
-        <h1 class="game-title">Run 3</h1>
-
-        <div class="game-container">
-            <div class="emulator-wrapper">
-                <div id="ruffle-player"></div>
-            </div>
-
-            <div class="description-section">
-                <div class="description">
-                    <h3>Description</h3>
-                    <p>Run 3 is an endless runner set in space! Jump and maneuver through tunnels while avoiding gaps and obstacles. Unlock new characters and explore infinite levels in this addictive classic.</p>
-                </div>
-            </div>
+        <div class="meta">
+            <div>Original Creator: <span>Joseph Cloutier (Player 03)</span></div>
+            <div>First Released: <span>2014</span></div>
+            <div>Current Version on site: <span>Original Flash version (via Ruffle)</span></div>
+            <div>Added to Unblocked Game Zone: <span>January 2025</span></div>
         </div>
 
-        <div class="featured-section">
-            <h2>More Games</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <img src="ducklife.png" alt="Duck Life">
-                    <div class="game-info">
-                        <h3>Duck Life</h3>
-                        <a href="duck-life.html">Play Now</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="AgeOfWar.jpg" alt="Age Of War">
-                    <div class="game-info">
-                        <h3>Age Of War</h3>
-                        <a href="age_of_war.html">Play Now</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="redball4.png" alt="Red Ball 4">
-                    <div class="game-info">
-                        <h3>Red Ball 4</h3>
-                        <a href="redball4.html">Play Now</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="learntofly.png" alt="Learn To Fly">
-                    <div class="game-info">
-                        <h3>Learn To Fly</h3>
-                        <a href="learn-to-fly.html">Play Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+        <p style="margin-top: 1.5rem;">
+            <strong>Controls:</strong> ARROW KEYS or WASD + SPACE / UP to jump<br>
+            <strong>Tip:</strong> Press Z to switch gravity direction in certain tunnels!
+        </p>
 
-    <footer>
-        &copy; 2026 The Unblocked Game Zone | All games are free to play
-    </footer>
+        <p style="margin-top: 2rem; color: #888; font-size: 0.95rem;">
+            All games on this site are hosted for educational/nostalgic purposes only.
+            Original game © Joseph Cloutier / player03.com
+        </p>
+    </div>
+</main>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
+<script>
+// Ruffle player setup
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "warnOnUnsupportedContent": false
+};
 
-        // Ruffle setup
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.RufflePlayer.config = { autoplay: "on", unmuteOverlay: "hidden" };
+const ruffle = window.RufflePlayer.newest();
+const player = ruffle.createPlayer();
+player.style.width = "100%";
+player.style.height = "100%";
+document.getElementById("ruffle-container").appendChild(player);
+player.load("https://unblokedgamzone.github.io/run3.swf");
 
-        const ruffle = window.RufflePlayer.newest();
-        const player = ruffle.createPlayer();
-        const container = document.getElementById("ruffle-player");
-        player.style.width = "100%";
-        player.style.height = "100%";
-        container.appendChild(player);
-        player.load("https://unblokedgamzone.github.io/run3.swf");
-    </script>
+// Fullscreen toggle
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const gameArea = document.querySelector(".game-area");
+
+fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        gameArea.requestFullscreen().catch(err => {
+            console.log("Fullscreen failed:", err);
+        });
+        fullscreenBtn.textContent = "Exit Fullscreen";
+    } else {
+        document.exitFullscreen();
+        fullscreenBtn.textContent = "Fullscreen";
+    }
+});
+
+// Update button text when exiting fullscreen via ESC
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        fullscreenBtn.textContent = "Fullscreen";
+    }
+});
+</script>
 </body>
 </html>
