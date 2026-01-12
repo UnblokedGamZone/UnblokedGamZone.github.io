@@ -88,7 +88,7 @@
         }
         .game-area {
             width: 100%;
-            max-width: 1280px;
+            max-width: 900px; /* Slightly wider cap to fit square nicely */
             margin: 0 auto 60px;
             position: relative;
             border-radius: 16px;
@@ -99,9 +99,9 @@
         }
         #ruffle-container {
             width: 100%;
-            aspect-ratio: 1 / 1;
-            max-height: 82vh;
-            margin: 0 auto;
+            aspect-ratio: 1 / 1; /* Square 1:1 ratio */
+            max-width: 800px;
+            margin: 0 auto; /* Centers horizontally if container is wider */
         }
         /* Description */
         .game-info-card {
@@ -163,6 +163,7 @@
         @media (max-width: 640px) {
             .top-bar { height: 56px; padding: 0 14px; }
             .game-info-card { padding: 28px; }
+            .game-area { max-width: 95%; }
         }
     </style>
 </head>
