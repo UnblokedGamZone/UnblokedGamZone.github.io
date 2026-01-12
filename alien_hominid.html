@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Run 3 • Unblocked Game Zone</title>
+    <title>Alien Hominid • Unblocked Game Zone</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         * {
@@ -70,9 +70,6 @@
             background: rgba(0, 255, 170, 0.25);
             border-color: #00ffaa;
             transform: translateY(-1px);
-        }
-        .btn:active {
-            transform: translateY(0);
         }
         main {
             margin-top: 80px;
@@ -174,7 +171,7 @@
 <div id="rotate-prompt">
     <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
     <h2>Please rotate your device</h2>
-    <p>Landscape mode gives the best experience for playing Run 3!</p>
+    <p>Landscape mode gives the best experience for playing Alien Hominid!</p>
 </div>
 
 <div class="top-bar">
@@ -188,39 +185,40 @@
 </div>
 
 <main>
-    <h1>Run 3</h1>
+    <h1>Alien Hominid</h1>
 
     <div class="game-area">
         <div id="ruffle-container"></div>
     </div>
 
     <div class="game-info-card">
-        <h2>About Run 3</h2>
+        <h2>About Alien Hominid</h2>
         <p>
-            Run 3 is the legendary third installment in the Run series — a fast-paced, gravity-defying endless runner set in abandoned space tunnels. 
-            Play as a variety of quirky alien characters, flip gravity, switch between running on walls/ceilings, and try to survive as long as possible 
-            in Infinite Mode or complete story-driven levels in Explore Mode. One of the most addictive browser games of all time!
+            The legendary Flash prototype that started it all! Crash-land on Earth, get chased by the FBI, and blast your way through waves of agents in this fast-paced, one-hit-death run 'n' gun shooter. 
+            Inspired by classics like Metal Slug and Contra, you play as a tiny yellow alien with a massive blaster — shoot, jump, throw grenades, and bite heads off enemies in hilarious style. 
+            Short, brutal, and insanely addictive — this is the original Newgrounds hit that led to the full console versions!
         </p>
 
         <div class="meta">
-            <div>Original Creator: <span>Joseph Cloutier (player_03)</span></div>
-            <div>First Released (Mobile as "Run."): <span>December 11, 2013</span></div>
-            <div>Browser/Flash Release (as "Run 3"): <span>June 5, 2014</span></div>
-            <div>Current Version on site: <span>Classic Flash version (via Ruffle emulator)</span></div>
+            <div>Original Creators: <span>Tom Fulp (programming) & Dan Paladin (art)</span></div>
+            <div>First Released (Flash prototype): <span>August 7, 2002</span></div>
+            <div>Current Version on site: <span>Original Newgrounds Flash prototype (via Ruffle emulator)</span></div>
             <div>Added to Unblocked Game Zone: <span>January 2026</span></div>
         </div>
 
         <p style="margin-top: 1.6rem;">
             <strong>Controls:</strong><br>
-            • Arrow Keys / WASD → Move & rotate tunnel<br>
-            • Space / Up Arrow → Jump<br>
-            • Z → Switch gravity direction (when available)<br><br>
-            <strong>Pro Tip:</strong> Look ahead and plan your path — especially on higher difficulties!
+            • Arrow Keys → Move & aim (Up = aim up, Down = duck/crawl)<br>
+            • A / Z → Shoot blaster<br>
+            • S / X → Jump<br>
+            • Down + Jump (in air) → Bite/head-stomp enemy<br>
+            • Space / Shift → Throw grenade (limited)<br><br>
+            <strong>Pro Tip:</strong> One hit = death — stay mobile, use grenades on groups, and don't get greedy!
         </p>
 
         <p style="margin-top: 2.2rem; color: #888; font-size: 0.95rem;">
-            This site hosts the classic Flash version for nostalgic & educational purposes only.<br>
-            Original game © Joseph Cloutier / <a href="https://player03.com/" style="color:#00cc99; text-decoration:none;">player03.com</a>
+            This site hosts the classic original Flash prototype for nostalgic & educational purposes only.<br>
+            Original game © Tom Fulp & Dan Paladin / Newgrounds • Later expanded by <a href="https://www.thebehemoth.com/" style="color:#00cc99; text-decoration:none;">The Behemoth</a>
         </p>
     </div>
 </main>
@@ -239,7 +237,7 @@ const player = ruffle.createPlayer();
 player.style.width = "100%";
 player.style.height = "100%";
 document.getElementById("ruffle-container").appendChild(player);
-player.load("https://unblokedgamzone.github.io/run3.swf");
+player.load("https://unblokedgamzone.github.io/alien_hominid.swf");  // ← Adjust if your SWF file has a different name (common: alien_hominid.swf or Alien_Hominid.swf)
 
 // Fullscreen functionality
 const fullscreenBtn = document.getElementById("fullscreenBtn");
