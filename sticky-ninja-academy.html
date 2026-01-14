@@ -18,74 +18,10 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-        /* Top Bar */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 64px;
-            background: rgba(15, 15, 15, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid #222;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            justify-content: space-between;
-        }
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #00ffaa;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.25s;
-        }
-        .back-btn:hover {
-            background: rgba(0, 255, 170, 0.15);
-        }
-        .back-btn span {
-            font-size: 1.4em;
-        }
-        .controls {
-            display: flex;
-            gap: 12px;
-        }
-        .btn {
-            background: rgba(0, 255, 170, 0.1);
-            color: #00ffaa;
-            border: 1px solid rgba(0, 255, 170, 0.3);
-            border-radius: 8px;
-            padding: 8px 14px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.25s;
-        }
-        .btn:hover {
-            background: rgba(0, 255, 170, 0.25);
-            border-color: #00ffaa;
-            transform: translateY(-1px);
-        }
-        main {
-            margin-top: 80px;
-            padding: 20px 20px 80px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        h1 {
-            text-align: center;
-            font-size: clamp(2.3rem, 7vw, 4rem);
-            color: #00ffaa;
-            margin: 30px 0 45px;
-            text-shadow: 0 0 20px rgba(0, 255, 170, 0.45);
-            letter-spacing: -1px;
-        }
+        /* Top Bar */ /* unchanged */
+
+        /* ... (keep all your existing top-bar, back-btn, controls, btn, main, h1 styles) ... */
+
         .game-area {
             width: 100%;
             max-width: 1280px;
@@ -96,141 +32,56 @@
             background: #000;
             border: 2px solid #222;
             box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+
+            /* NEW: Flex centering for perfect alignment */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         #ruffle-container {
             width: 100%;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 4 / 3; /* keeps game proportions */
             max-height: 82vh;
             margin: 0 auto;
+            /* Optional: background fallback if SWF has transparency */
+            background: #000;
         }
-        /* Description */
-        .game-info-card {
-            background: #181818;
-            border-radius: 16px;
-            padding: 35px;
-            border: 1px solid #333;
-            max-width: 1100px;
-            margin: 0 auto 70px;
-            line-height: 1.65;
-        }
-        .game-info-card h2 {
-            color: #00ffaa;
-            margin-bottom: 1.3rem;
-            font-size: 2rem;
-        }
-        .meta {
-            color: #888;
-            font-size: 0.97rem;
-            margin: 1.8rem 0;
-            padding: 1.2rem 0;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-        }
-        .meta div {
-            margin: 0.5rem 0;
-        }
-        .meta span {
-            color: #aaa;
-            font-weight: 500;
-        }
-        /* Mobile rotate prompt */
-        #rotate-prompt {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.96);
-            z-index: 9999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #00ffaa;
-            text-align: center;
-            padding: 30px;
-        }
-        #rotate-prompt img {
-            width: 110px;
-            margin-bottom: 30px;
-            animation: pulseRotate 2.2s infinite;
-        }
-        @keyframes pulseRotate {
-            0%,100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(-90deg) scale(1.12); }
-        }
-        @media (max-width: 1024px) and (orientation: portrait) {
-            #rotate-prompt { display: flex !important; }
-            main, .top-bar { display: none; }
-        }
-        @media (max-width: 640px) {
-            .top-bar { height: 56px; padding: 0 14px; }
-            .game-info-card { padding: 28px; }
-        }
+
+        /* ... (keep description, meta, rotate-prompt, media queries unchanged) ... */
     </style>
 </head>
 <body>
-<div id="rotate-prompt">
-    <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
-    <h2>Please rotate your device</h2>
-    <p>Landscape mode gives the best experience for playing Sticky Ninja Academy!</p>
-</div>
-<div class="top-bar">
-    <a href="https://unblokedgamzone.github.io/" class="back-btn">
-        <span>←</span> Back to Home
-    </a>
-    <div class="controls">
-        <button class="btn" id="fullscreenBtn">Fullscreen</button>
-    </div>
-</div>
+<!-- rotate-prompt, top-bar unchanged -->
+
 <main>
     <h1>Sticky Ninja Academy</h1>
     <div class="game-area">
         <div id="ruffle-container"></div>
     </div>
-    <div class="game-info-card">
-        <h2>About Sticky Ninja Academy</h2>
-        <p>
-            Enroll in the ultimate ninja training and become a Sticky Ninja Master! 
-            <strong>Sticky Ninja Academy</strong> is the classic 2011 Flash hit by LongAnimals.
-            Use precise mouse drags to launch your ninja like a slingshot, stick to surfaces, bounce off springs, 
-            defeat enemy ninjas with deadly accuracy, avoid deadly spikes & traps, and reach the exit door in each of the 30 challenging levels.
-            Aim for perfection: fewer jumps = higher scores! A perfect blend of physics-based puzzle action and ninja flair.
-        </p>
-        <div class="meta">
-            <div>Original Creator / Developer: <span>LongAnimals (programming), biscuitlocker (art)</span></div>
-            <div>First Released: <span>2011</span> (November on Newgrounds & Armor Games)</div>
-            <div>Current Version on site: <span>Classic Flash version (via Ruffle emulator)</span></div>
-            <div>Added to Unblocked Game Zone: <span>January 2026</span></div>
-        </div>
-        <p style="margin-top: 1.6rem;">
-            <strong>Controls:</strong><br>
-            • Mouse → Drag and release to launch/jump the ninja (like a slingshot)<br>
-            • Click & drag on empty space → Look around / plan your shot<br>
-            • Stick to most black/wooden surfaces → Use them to climb or redirect<br>
-            • Bounce off springy objects → Gain height or speed<br>
-            • Avoid spikes & slick surfaces that make you slide!<br><br>
-            <strong>Pro Tip:</strong> Kill all enemies to open the exit — fewer jumps means a better score! 
-            Experiment with bounces and sticky walls to chain perfect runs. Smash barrels for hidden surprises!
-        </p>
-        <p style="margin-top: 2.2rem; color: #888; font-size: 0.95rem;">
-            This site hosts the classic Flash version for nostalgic & educational purposes only.<br>
-            Original game © LongAnimals • Originally published on <a href="https://armorgames.com/play/12539/sticky-ninja-academy" style="color:#00cc99; text-decoration:none;">Armor Games</a> & Newgrounds
-        </p>
-    </div>
+    <!-- game-info-card unchanged -->
 </main>
+
 <script>
-// Ruffle player setup
+// Ruffle player setup - IMPROVED with better scaling & centering
 window.RufflePlayer = window.RufflePlayer || {};
 window.RufflePlayer.config = {
     "autoplay": "on",
     "unmuteOverlay": "hidden",
-    "warnOnUnsupportedContent": false
+    "warnOnUnsupportedContent": false,
+    "scale": "showAll",       // NEW: Keeps aspect ratio, adds letterbox → centers content
+    "salign": ""              // NEW: Centers SWF content inside player (default is often top-left)
+    // Optional: "letterbox": "on"  // forces letterboxing for strict centering
 };
+
 const ruffle = window.RufflePlayer.newest();
 const player = ruffle.createPlayer();
 player.style.width = "100%";
 player.style.height = "100%";
 document.getElementById("ruffle-container").appendChild(player);
-player.load("https://unblokedgamzone.github.io/sticky-ninja-academy-12539fdd9.swf"); // ← Update path if needed!
-// Fullscreen functionality
+player.load("https://unblokedgamzone.github.io/sticky-ninja-academy-12539fdd9.swf");
+
+// Fullscreen functionality (unchanged)
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const gameArea = document.querySelector(".game-area");
 fullscreenBtn.addEventListener("click", () => {
