@@ -328,12 +328,11 @@
                 <div id="suggestions"></div>
             </div>
         </header>
-        <!-- Featured Games (no longer affected by search) -->
+        <!-- Featured Games -->
         <div class="featured-bar">
             <h2>Featured Games</h2>
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <!-- Featured games remain unchanged and unsearchable -->
                     <div class="featured-game">
                         <img src="run3.png" alt="Run 3">
                         <p>Run 3</p>
@@ -380,19 +379,46 @@
                         <p>Duck Life</p>
                         <a href="https://unblokedgamzone.github.io/duck-life">Play Now</a>
                     </div>
-
-
                     <div class="featured-game">
-                        <img src="ducklife.png" alt="Duck Life">
-                        <p>BTD4</p>
+                        <img src="AgeOfWar.jpg" alt="Age Of War">
+                        <p>Age Of War</p>
+                        <a href="https://unblokedgamzone.github.io/age_of_war">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="2025_08_15_0n8_Kleki.png" alt="Alien Hominid">
+                        <p>Alien Hominid</p>
+                        <a href="https://unblokedgamzone.github.io/alien_hominid">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="easygame.png" alt="Worlds Hardest Game">
+                        <p>Worlds Hardest Game</p>
+                        <a href="https://unblokedgamzone.github.io/the-worlds-hardest-game.html">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="redball4.png" alt="Red Ball 4">
+                        <p>Red Ball 4</p>
+                        <a href="https://unblokedgamzone.github.io/redball4">Play Now</a>
+                    </div>
+                    <div class="featured-game">
+                        <img src="2025_08_22_0tk_Kleki.png" alt="Awesome Tanks">
+                        <p>Awesome Tanks</p>
+                        <a href="https://unblokedgamzone.github.io/AwesomeTanks">Play Now</a>
+                    </div>
+                    <!-- Added BTD4 to featured carousel -->
+                    <div class="featured-game">
+                        <img src="btd4.jpg" alt="Bloons TD 4">
+                        <p>Bloons TD 4</p>
                         <a href="https://unblokedgamzone.github.io/bloons-td-4.html">Play Now</a>
                     </div>
-                    
-                    <!-- ... (rest of duplicates unchanged) ... -->
+                    <div class="featured-game">
+                        <img src="btd4.jpg" alt="Bloons TD 4">
+                        <p>Bloons TD 4</p>
+                        <a href="https://unblokedgamzone.github.io/bloons-td-4.html">Play Now</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Popular Games Grid (this is what gets filtered by search) -->
+        <!-- Popular Games Grid -->
         <div class="popular-section">
             <h2>Popular Games</h2>
             <div class="games-grid" id="gamesGrid">
@@ -509,10 +535,18 @@
                     </div>
                 </div>
                 <div class="game-card">
-                    <img src="btd4.jpg" alt="BTD4">
+                    <img src="btd2.png" alt="BTD2">
                     <div class="game-info">
                         <h3>BTD2</h3>
                         <a href="https://unblokedgamzone.github.io/bloonstd.html">Play Now</a>
+                    </div>
+                </div>
+                <!-- Added BTD4 to popular grid -->
+                <div class="game-card">
+                    <img src="btd4.jpg" alt="Bloons TD 4">
+                    <div class="game-info">
+                        <h3>Bloons TD 4</h3>
+                        <a href="https://unblokedgamzone.github.io/bloons-td-4.html">Play Now</a>
                     </div>
                 </div>
             </div>
@@ -545,14 +579,8 @@
             {"name": "Burrito Bison Revenge", "url": "https://unblokedgamzone.github.io/burrito_bison_revenge", "img": "burrito-bison-revenge.png"},
             {"name": "Learn To Fly 3", "url": "https://unblokedgamzone.github.io/Learn-To-Fly-3.html", "img": "ltf3.jpg"},
             {"name": "BTD1", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "Bloons_TD_iOS_Logo.jpg"},
-            {"name": "BTD2", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "btd2.png"}
+            {"name": "BTD2", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "btd2.png"},
             {"name": "BTD4", "url": "https://unblokedgamzone.github.io/bloons-td-4.html", "img": "btd4.jpg"}
-
-           
-
-
-
-            
         ];
 
         const searchInput = document.getElementById('search');
@@ -561,7 +589,6 @@
         searchInput.addEventListener('input', function(e) {
             const query = e.target.value.trim().toLowerCase();
             suggestionsBox.innerHTML = '';
-
             if (query === '') {
                 suggestionsBox.style.display = 'none';
                 // Show all popular grid cards
@@ -570,10 +597,8 @@
                 });
                 return;
             }
-
             // Only search in popular games list
             const matches = games.filter(game => game.name.toLowerCase().includes(query)).slice(0, 8);
-
             if (matches.length === 0) {
                 suggestionsBox.style.display = 'none';
             } else {
@@ -591,8 +616,7 @@
                 });
                 suggestionsBox.style.display = 'block';
             }
-
-            // Filter popular games grid (only this section is affected)
+            // Filter popular games grid
             document.querySelectorAll('.game-card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 card.style.display = title.includes(query) ? 'block' : 'none';
@@ -608,4 +632,3 @@
     </script>
 </body>
 </html>
-
