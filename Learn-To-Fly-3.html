@@ -1,121 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learn to Fly 3</title>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Learn to Fly 3 • Unblocked Game Zone</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(15, 15, 15, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00ffaa;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.25s;
+        }
+        .back-btn:hover {
+            background: rgba(0, 255, 170, 0.15);
+        }
+        .back-btn span {
+            font-size: 1.4em;
+        }
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00ffaa;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+        .btn:hover {
+            background: rgba(0, 255, 170, 0.25);
+            border-color: #00ffaa;
+            transform: translateY(-1px);
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px 20px 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: clamp(2.3rem, 7vw, 4rem);
+            color: #00ffaa;
+            margin: 30px 0 45px;
+            text-shadow: 0 0 20px rgba(0, 255, 170, 0.45);
+            letter-spacing: -1px;
+        }
+        .game-area {
+            width: 100%;
+            max-width: 1030px;
+            margin: 0 auto 60px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            border: 2px solid #222;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #ruffle-container {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 82vh;
+            margin: 0 auto;
+            background: #000;
+        }
+        /* Description */
+        .game-info-card {
+            background: #181818;
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #333;
+            max-width: 1100px;
+            margin: 0 auto 70px;
+            line-height: 1.65;
+        }
+        .game-info-card h2 {
+            color: #00ffaa;
+            margin-bottom: 1.3rem;
+            font-size: 2rem;
+        }
+        .meta {
+            color: #888;
+            font-size: 0.97rem;
+            margin: 1.8rem 0;
+            padding: 1.2rem 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .meta div {
+            margin: 0.5rem 0;
+        }
+        .meta span {
+            color: #aaa;
+            font-weight: 500;
+        }
+        /* Mobile rotate prompt */
+        #rotate-prompt {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #00ffaa;
+            text-align: center;
+            padding: 30px;
+        }
+        #rotate-prompt img {
+            width: 110px;
+            margin-bottom: 30px;
+            animation: pulseRotate 2.2s infinite;
+        }
+        @keyframes pulseRotate {
+            0%,100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-90deg) scale(1.12); }
+        }
+        @media (max-width: 1024px) and (orientation: portrait) {
+            #rotate-prompt { display: flex !important; }
+            main, .top-bar { display: none; }
+        }
+        @media (max-width: 640px) {
+            .top-bar { height: 56px; padding: 0 14px; }
+            .game-info-card { padding: 28px; }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen">
-  <!-- Header -->
-  <header class="w-full text-center py-4">
-    <a href="https://unblokedgamzone.github.io/">
-      <img src="logo.png" alt="Unblocked Game Zone Logo" class="w-32 mx-auto mb-2">
+<body>
+<div id="rotate-prompt">
+    <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
+    <h2>Please rotate your device</h2>
+    <p>Landscape mode gives the best experience for playing Learn to Fly 3!</p>
+</div>
+<div class="top-bar">
+    <a href="https://unblokedgamzone.github.io/" class="back-btn">
+        <span>←</span> Back to Home
     </a>
-    <h1 class="text-3xl font-bold">Learn to Fly 3</h1>
-  </header>
-  <!-- Main Emulator Section -->
-  <div class="flex w-full max-w-7xl mx-auto my-8 px-4">
-    <!-- Left Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center mr-4">
-      <div class="text-center"></div>
+    <div class="controls">
+        <button class="btn" id="fullscreenBtn">Fullscreen</button>
     </div>
-    <!-- Ruffle Emulator + Controls Below -->
-    <div class="w-1/2 flex flex-col items-center">
-      <!-- Emulator Container -->
-      <div class="border-4 border-blue-500 rounded-lg p-4 bg-black w-full">
-        <div id="ruffle-player" class="w-full" style="aspect-ratio: 4/3; max-height: 600px;"></div>
-      </div>
-      
-      <!-- Fullscreen Button + Description -->
-      <div class="mt-8 w-full flex flex-row gap-8 items-start">
-        <!-- Fullscreen Button -->
-        <div class="flex gap-6">
-          <button id="fullscreen-btn" class="w-20 h-20 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all cursor-pointer">
-            <img src="fullscreen.png" alt="Fullscreen" class="w-full h-full object-contain">
-          </button>
+</div>
+<main>
+    <h1>Learn to Fly 3</h1>
+    <div class="game-area">
+        <div id="ruffle-container"></div>
+    </div>
+    <div class="game-info-card">
+        <h2>About Learn to Fly 3</h2>
+        <p>
+            The epic finale of the penguin's flight journey! In <strong>Learn to Fly 3</strong> (2016 by Light Bringer Games), build and customize your own spaceship from scratch — engines, wings, boosters, fuel tanks, and more. Launch upward to break through the atmosphere and reach space itself!
+            Earn cash from each flight to upgrade parts, unlock new modes (Story: campaign challenges; Payload: carry heavy weights; Classic: horizontal distance like the originals), and achieve space glory. More complex building, achievements, easter eggs, and satisfying progression — the penguin finally conquers the stars!
+        </p>
+        <div class="meta">
+            <div>Original Creator / Developer: <span>Light Bringer Games (lightbringer777)</span></div>
+            <div>First Released: <span>February 19, 2016</span> (Flash on Kongregate, Armor Games, Newgrounds; later Steam port)</div>
+            <div>Current Version on site: <span>Classic Flash version (via Ruffle emulator)</span></div>
+            <div>Added to Unblocked Game Zone: <span>January 2026</span></div>
         </div>
-        
-        <!-- Description Panel -->
-        <div class="flex-1 bg-gray-800 rounded-lg p-6 shadow-lg text-lg">
-          <h3 class="text-xl font-bold mb-4">Description</h3>
-          <p>No description yet.</p>
-        </div>
-      </div>
+        <p style="margin-top: 1.6rem;">
+            <strong>Controls:</strong><br>
+            • Left/Right Arrow or A/D → Steer / adjust angle during flight<br>
+            • Space / W / Up Arrow → Activate rockets / boosts / special abilities<br>
+            • S / Down Arrow → Brake / stop (in certain stages or for control)<br>
+            • 1/2/3/4 → Quick-use single boosts (customizable in options)<br>
+            • Mouse → Drag parts in build/upgrade menu, click buttons<br><br>
+            <strong>Pro Tip:</strong> Focus on lightweight, high-thrust builds early — prioritize engines & fuel efficiency for height! In Story mode, complete challenges for bonuses; Payload mode needs massive power/structural upgrades. Balance weight vs. thrust — too heavy = no liftoff! Experiment with parts combos, unlock achievements for extra cash, and aim for orbital records. Use the shop wisely to snowball upgrades!
+        </p>
+        <p style="margin-top: 2.2rem; color: #888; font-size: 0.95rem;">
+            This site hosts the classic Flash version for nostalgic & educational purposes only.<br>
+            Original game © Light Bringer Games • Originally published on <a href="https://armorgames.com/play/17987/learn-to-fly-3" style="color:#00cc99; text-decoration:none;">Armor Games</a>, <a href="https://www.kongregate.com/games/light_bringer777/learn-to-fly-3" style="color:#00cc99; text-decoration:none;">Kongregate</a> & <a href="https://www.newgrounds.com/portal/view/670866" style="color:#00cc99; text-decoration:none;">Newgrounds</a>
+        </p>
     </div>
-    <!-- Right Ad Space -->
-    <div class="w-1/4 bg-gray-800 flex items-center justify-center ml-4">
-      <div class="text-center"></div>
-    </div>
-  </div>
-  
-  <!-- Game Selection Boxes (4 Larger Squares) -->
-  <div class="w-full max-w-7xl mx-auto my-8 px-4">
-    <h2 class="text-2xl font-bold mb-4 text-center">Featured Games</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <a href="#featured1" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+1" alt="Game 1" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured2" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+2" alt="Game 2" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured3" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+3" alt="Game 3" class="w-full h-full object-cover rounded">
-      </a>
-      <a href="#featured4" class="bg-gray-700 rounded-lg p-4 flex items-center justify-center h-48 cursor-pointer hover:bg-gray-600">
-        <img src="https://via.placeholder.com/200x200?text=Game+4" alt="Game 4" class="w-full h-full object-cover rounded">
-      </a>
-    </div>
-  </div>
-  <!-- Smaller Icon Boxes (5 Icons) -->
-  <div class="w-full max-w-7xl mx-auto my-8 px-4">
-    <h2 class="text-2xl font-bold mb-4 text-center">Menu</h2>
-    <div class="grid grid-cols-5 gap-2">
-      <a href="https://unblokedgamzone.github.io/" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Home</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/contact.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Contacts</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/forms.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Forms</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/games.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Games</span>
-      </a>
-      <a href="https://unblokedgamzone.github.io/settings.html" class="bg-gray-700 rounded-lg p-1 flex items-center justify-center h-16 cursor-pointer hover:bg-gray-600">
-        <span class="text-sm font-medium text-center">Settings</span>
-      </a>
-    </div>
-  </div>
+</main>
+<script>
+// Ruffle player setup - with centering & scaling
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "warnOnUnsupportedContent": false,
+    "scale": "showAll",       // Keeps aspect ratio, adds letterbox → centers content
+    "salign": ""              // Centers SWF content inside player
+};
 
-  <script>
-    // Ruffle Emulator Initialization
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-    const container = document.getElementById("ruffle-player");
-    
-    player.style.width = '100%';
-    player.style.height = '100%';
-    container.appendChild(player);
-    player.load("Learn-To-Fly-3.swf");
+const ruffle = window.RufflePlayer.newest();
+const player = ruffle.createPlayer();
+player.style.width = "100%";
+player.style.height = "100%";
+document.getElementById("ruffle-container").appendChild(player);
+player.load("https://unblokedgamzone.github.io/Learn-To-Fly-3.swf"); // ← Update path if needed!
 
-    // Fullscreen functionality
-    const fullscreenBtn = document.getElementById("fullscreen-btn");
-    const emulatorContainer = container.parentElement;
-
-    fullscreenBtn.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
-        if (emulatorContainer.requestFullscreen) emulatorContainer.requestFullscreen();
-        else if (emulatorContainer.webkitRequestFullscreen) emulatorContainer.webkitRequestFullscreen();
-        else if (emulatorContainer.msRequestFullscreen) emulatorContainer.msRequestFullscreen();
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
-      }
-    });
-  </script>
+// Fullscreen functionality
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const gameArea = document.querySelector(".game-area");
+fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        gameArea.requestFullscreen().catch(err => {
+            console.log("Fullscreen request failed:", err);
+        });
+        fullscreenBtn.textContent = "Exit Fullscreen";
+    } else {
+        document.exitFullscreen();
+        fullscreenBtn.textContent = "Fullscreen";
+    }
+});
+document.addEventListener("fullscreenchange", () => {
+    fullscreenBtn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
+});
+</script>
 </body>
 </html>
