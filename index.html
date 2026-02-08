@@ -36,13 +36,13 @@
             color: #00ffaa;
             text-shadow: 0 0 8px #00ffaa;
             text-decoration: none;
-            margin-left: 20px; /* Extra spacing from far left */
+            margin-left: 20px;
         }
         .nav-links {
             display: flex;
             gap: 30px;
-            margin-right: auto; /* Pushes hamburger to the right */
-            margin-left: 80px; /* Moves the entire menu group leftward from center */
+            margin-right: auto;
+            margin-left: 80px;
         }
         .nav-links a {
             color: #ffffff;
@@ -61,7 +61,6 @@
             color: #000;
             font-weight: bold;
         }
-        /* Hamburger Menu for Mobile */
         .hamburger {
             display: none;
             font-size: 1.8em;
@@ -81,7 +80,7 @@
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease;
-                margin-left: 0; /* Reset for mobile */
+                margin-left: 0;
             }
             .nav-links.open {
                 max-height: 400px;
@@ -95,9 +94,8 @@
                 display: block;
             }
         }
-        /* Main content - push down below fixed nav */
         main {
-            margin-top: 70px; /* Space for fixed nav */
+            margin-top: 70px;
         }
         header {
             background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
@@ -116,7 +114,6 @@
             margin: 10px 0 30px;
             color: #aaaaaa;
         }
-        /* Search container for positioning dropdown */
         .search-container {
             position: relative;
             display: inline-block;
@@ -131,7 +128,6 @@
             font-size: 1em;
             outline: none;
         }
-        /* Search suggestions dropdown */
         #suggestions {
             position: absolute;
             top: 100%;
@@ -167,7 +163,6 @@
         .suggestion-item span {
             font-weight: bold;
         }
-        /* Featured Games */
         .featured-bar {
             background: #1a1a1a;
             padding: 40px 0;
@@ -229,7 +224,6 @@
         .featured-game a:hover {
             background: #00cc88;
         }
-        /* Popular Games Section */
         .popular-section {
             max-width: 1200px;
             margin: 60px auto;
@@ -308,7 +302,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Menu -->
     <nav>
         <a href="index.html" class="logo">Unblocked Zone</a>
         <div class="nav-links" id="navLinks">
@@ -319,6 +312,7 @@
         </div>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
     </nav>
+
     <main>
         <header>
             <h1>The Unblocked Game Zone</h1>
@@ -328,6 +322,7 @@
                 <div id="suggestions"></div>
             </div>
         </header>
+
         <!-- Featured Games -->
         <div class="featured-bar">
             <h2>Featured Games</h2>
@@ -404,7 +399,7 @@
                         <p>Awesome Tanks</p>
                         <a href="https://unblokedgamzone.github.io/AwesomeTanks">Play Now</a>
                     </div>
-                    <!-- Added BTD4 to featured carousel -->
+                    <!-- BTD4 in featured -->
                     <div class="featured-game">
                         <img src="btd4.jpg" alt="Bloons TD 4">
                         <p>Bloons TD 4</p>
@@ -413,6 +408,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Popular Games Grid -->
         <div class="popular-section">
             <h2>Popular Games</h2>
@@ -536,41 +532,35 @@
                         <a href="https://unblokedgamzone.github.io/bloonstd2.html">Play Now</a>
                     </div>
                 </div>
-                <!-- Added BTD4 to popular grid -->
                 <div class="game-card">
                     <img src="btd4.jpg" alt="Bloons TD 4">
                     <div class="game-info">
                         <h3>BTD4</h3>
                         <a href="https://unblokedgamzone.github.io/bloons-td-4.html">Play Now</a>
                     </div>
-
-                    </div>
-                <!-- Added BTD4 to popular grid -->
+                </div>
                 <div class="game-card">
-                    <img src="papa_pizza.avif" alt="papas pizza">
+                    <img src="papa_pizza.avif" alt="Papas Pizzeria">
                     <div class="game-info">
-                        <h3>Papas Pizzaria</h3>
+                        <h3>Papa's Pizzeria</h3>
                         <a href="https://unblokedgamzone.github.io/papas_pizza">Play Now</a>
                     </div>
-
-
+                </div>
                 <div class="game-card">
-                    <img src="FPA.png" alt="FPA">
+                    <img src="FPA.png" alt="Fancy Pants Adventure">
                     <div class="game-info">
                         <h3>Fancy Pants W1</h3>
                         <a href="https://unblokedgamzone.github.io/FPA">Play Now</a>
                     </div>
-
-                    
-
-
                 </div>
             </div>
         </div>
     </main>
+
     <footer>
         © 2026 The Unblocked Game Zone | All games are free to play
     </footer>
+
     <script>
         // Hamburger menu toggle
         function toggleMenu() {
@@ -596,9 +586,9 @@
             {"name": "Learn To Fly 3", "url": "https://unblokedgamzone.github.io/Learn-To-Fly-3.html", "img": "ltf3.jpg"},
             {"name": "BTD1", "url": "https://unblokedgamzone.github.io/bloonstd.html", "img": "Bloons_TD_iOS_Logo.jpg"},
             {"name": "BTD2", "url": "https://unblokedgamzone.github.io/bloonstd2.html", "img": "btd2.png"},
-            {"name": "BTD4", "url": "https://unblokedgamzone.github.io/bloons-td-4.html", "img": "btd4.jpg"}
-            {"name": "Papas Pizzaria", "url": "https://unblokedgamzone.github.io/papas_pizza", "img": "papa_pizza.avif"}
-            {"name": "FPA", "url": "https://unblokedgamzone.github.io/FPA", "img": "FPA.png"}
+            {"name": "BTD4", "url": "https://unblokedgamzone.github.io/bloons-td-4.html", "img": "btd4.jpg"},
+            {"name": "Papas Pizzaria", "url": "https://unblokedgamzone.github.io/papas_pizza", "img": "papa_pizza.avif"},
+            {"name": "Fancy Pants W1", "url": "https://unblokedgamzone.github.io/FPA", "img": "FPA.png"}
         ];
 
         const searchInput = document.getElementById('search');
@@ -607,16 +597,17 @@
         searchInput.addEventListener('input', function(e) {
             const query = e.target.value.trim().toLowerCase();
             suggestionsBox.innerHTML = '';
+
             if (query === '') {
                 suggestionsBox.style.display = 'none';
-                // Show all popular grid cards
                 document.querySelectorAll('.game-card').forEach(card => {
                     card.style.display = 'block';
                 });
                 return;
             }
-            // Only search in popular games list
+
             const matches = games.filter(game => game.name.toLowerCase().includes(query)).slice(0, 8);
+
             if (matches.length === 0) {
                 suggestionsBox.style.display = 'none';
             } else {
@@ -634,14 +625,14 @@
                 });
                 suggestionsBox.style.display = 'block';
             }
-            // Filter popular games grid
+
+            // Filter the popular games grid
             document.querySelectorAll('.game-card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 card.style.display = title.includes(query) ? 'block' : 'none';
             });
         });
 
-        // Hide suggestions when clicking outside
         document.addEventListener('click', function(e) {
             if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
                 suggestionsBox.style.display = 'none';
@@ -650,8 +641,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
