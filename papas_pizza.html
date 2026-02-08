@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Papa's Pizzeria • Unblocked Game Zone</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(15, 15, 15, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00ffaa;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.25s;
+        }
+        .back-btn:hover {
+            background: rgba(0, 255, 170, 0.15);
+        }
+        .back-btn span {
+            font-size: 1.4em;
+        }
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            background: rgba(0, 255, 170, 0.1);
+            color: #00ffaa;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+        .btn:hover {
+            background: rgba(0, 255, 170, 0.25);
+            border-color: #00ffaa;
+            transform: translateY(-1px);
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px 20px 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: clamp(2.3rem, 7vw, 4rem);
+            color: #00ffaa;
+            margin: 30px 0 45px;
+            text-shadow: 0 0 20px rgba(0, 255, 170, 0.45);
+            letter-spacing: -1px;
+        }
+        .game-area {
+            width: 100%;
+            max-width: 1030px;
+            margin: 0 auto 60px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            border: 2px solid #222;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #ruffle-container {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 82vh;
+            margin: 0 auto;
+            background: #000;
+        }
+        /* Description */
+        .game-info-card {
+            background: #181818;
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #333;
+            max-width: 1100px;
+            margin: 0 auto 70px;
+            line-height: 1.65;
+        }
+        .game-info-card h2 {
+            color: #00ffaa;
+            margin-bottom: 1.3rem;
+            font-size: 2rem;
+        }
+        .meta {
+            color: #888;
+            font-size: 0.97rem;
+            margin: 1.8rem 0;
+            padding: 1.2rem 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .meta div {
+            margin: 0.5rem 0;
+        }
+        .meta span {
+            color: #aaa;
+            font-weight: 500;
+        }
+        /* Mobile rotate prompt */
+        #rotate-prompt {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #00ffaa;
+            text-align: center;
+            padding: 30px;
+        }
+        #rotate-prompt img {
+            width: 110px;
+            margin-bottom: 30px;
+            animation: pulseRotate 2.2s infinite;
+        }
+        @keyframes pulseRotate {
+            0%,100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-90deg) scale(1.12); }
+        }
+        @media (max-width: 1024px) and (orientation: portrait) {
+            #rotate-prompt { display: flex !important; }
+            main, .top-bar { display: none; }
+        }
+        @media (max-width: 640px) {
+            .top-bar { height: 56px; padding: 0 14px; }
+            .game-info-card { padding: 28px; }
+        }
+    </style>
+</head>
+<body>
+<div id="rotate-prompt">
+    <img src="https://i.ibb.co/3mV7j7Q/rotate-phone.png" alt="Rotate Device">
+    <h2>Please rotate your device</h2>
+    <p>Landscape mode gives the best experience for playing Papa's Pizzeria!</p>
+</div>
+<div class="top-bar">
+    <a href="https://unblokedgamzone.github.io/" class="back-btn">
+        <span>←</span> Back to Home
+    </a>
+    <div class="controls">
+        <button class="btn" id="fullscreenBtn">Fullscreen</button>
+    </div>
+</div>
+<main>
+    <h1>Papa's Pizzeria</h1>
+    <div class="game-area">
+        <div id="ruffle-container"></div>
+    </div>
+    <div class="game-info-card">
+        <h2>About Papa's Pizzeria</h2>
+        <p>
+            The very first game in the hugely popular Papa Louie series! In <strong>Papa's Pizzeria</strong> (2007 by Flipline Studios), you're the new manager of Papa's Pizzeria. Take orders, cook pizzas to perfection, add toppings exactly as requested, cut them into perfect slices, and serve happy customers before they get impatient.
+            Earn tips, level up your skills, unlock new toppings and ingredients, and try to earn the highest customer ranks. A fun time-management restaurant sim that started an entire franchise!
+        </p>
+        <div class="meta">
+            <div>Original Creator / Developer: <span>Flipline Studios</span></div>
+            <div>First Released: <span>2007</span> (Flash on Flipline, Kongregate, Armor Games)</div>
+            <div>Current Version on site: <span>Classic Flash version v2 (via Ruffle emulator)</span></div>
+            <div>Added to Unblocked Game Zone: <span>January 2026</span></div>
+        </div>
+        <p style="margin-top: 1.6rem;">
+            <strong>Controls:</strong><br>
+            • Mouse → Click to interact (take orders, drag toppings, move pizzas, cut slices)<br>
+            • Click & drag → Place sauce/cheese/toppings, move pizzas between stations<br>
+            • Spacebar or Click → Speed up actions (optional)<br><br>
+            <strong>Pro Tip:</strong> Master the order station first — memorize common orders to go faster! Don't overload pizzas with too many toppings early on (customers get picky). Focus on perfect cuts (even slices = big tips). Unlock better ingredients and upgrades quickly to handle tougher customers. Keep the oven timer in check — burnt pizzas lose points fast!
+        </p>
+        <p style="margin-top: 2.2rem; color: #888; font-size: 0.95rem;">
+            This site hosts the classic Flash version for nostalgic & educational purposes only.<br>
+            Original game © Flipline Studios • Originally published on <a href="https://www.flipline.com/games/papaspizzeria/" style="color:#00cc99; text-decoration:none;">Flipline</a>, <a href="https://armorgames.com/play/1988/papas-pizzeria" style="color:#00cc99; text-decoration:none;">Armor Games</a> & Kongregate
+        </p>
+    </div>
+</main>
+<script>
+// Ruffle player setup - with centering & scaling
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "warnOnUnsupportedContent": false,
+    "scale": "showAll",       // Keeps aspect ratio, adds letterbox → centers content
+    "salign": ""              // Centers SWF content inside player
+};
+
+const ruffle = window.RufflePlayer.newest();
+const player = ruffle.createPlayer();
+player.style.width = "100%";
+player.style.height = "100%";
+document.getElementById("ruffle-container").appendChild(player);
+player.load("https://unblokedgamzone.github.io/papaspizzeria_v2.swf"); // ← Your specified filename
+
+// Fullscreen functionality
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const gameArea = document.querySelector(".game-area");
+fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        gameArea.requestFullscreen().catch(err => {
+            console.log("Fullscreen request failed:", err);
+        });
+        fullscreenBtn.textContent = "Exit Fullscreen";
+    } else {
+        document.exitFullscreen();
+        fullscreenBtn.textContent = "Fullscreen";
+    }
+});
+document.addEventListener("fullscreenchange", () => {
+    fullscreenBtn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
+});
+</script>
+</body>
+</html>
